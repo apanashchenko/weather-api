@@ -1,4 +1,4 @@
-package com.weatherapi.ui.defaults;
+package com.weatherapi.ui.single;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterAll;
@@ -18,15 +18,16 @@ import static com.codeborne.selenide.Selenide.open;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class DefaultBase {
+public class SingleTestBase {
 
     @Value("${ui.url}")
     private String baseUrl;
 
     @BeforeAll
     public void setUp() {
+        Configuration.baseUrl = this.baseUrl;
         Configuration.startMaximized = true;
-        open(baseUrl);
+        open(Configuration.baseUrl);
     }
 
     @AfterAll

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 
 @Slf4j
-public class WeatherBitTests extends SingleBase {
+public class WeatherBitTests extends SingleTestBase {
 
     private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
 

@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.params.provider.Arguments.of;
 
 @Slf4j
-public class DefaultValuesWeatherTests extends DefaultBase {
+public class DefaultValuesWeatherTests extends DefaultTestBase {
 
     private static Stream<Arguments> widgets() {
         return Stream.of(

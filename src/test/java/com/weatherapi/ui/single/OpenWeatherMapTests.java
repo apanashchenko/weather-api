@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 
 @Slf4j
-public class OpenWeatherMapTests extends SingleBase {
+public class OpenWeatherMapTests extends SingleTestBase {
 
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
 

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 
 @Slf4j
-public class OpenWeatherMapMockTests extends SingleMockBase {
+public class OpenWeatherMapMockTests extends SingleMockTestBase {
 
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
 

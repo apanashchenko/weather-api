@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 
 @Slf4j
-public class WeatherBitMockTests extends SingleMockBase {
+public class WeatherBitMockTests extends SingleMockTestBase {
 
     private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
 

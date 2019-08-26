@@ -17,7 +17,7 @@ import static org.junit.jupiter.params.provider.Arguments.of;
 
 
 @Slf4j
-public class MainWeatherSearchTests extends DefaultBase {
+public class MainWeatherSearchTests extends DefaultTestBase {
 
     private MainSearchForm mainSearchForm = new MainSearchForm();
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();

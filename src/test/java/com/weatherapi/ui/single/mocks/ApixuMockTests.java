@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 
 @Slf4j
-public class ApixuMockTests extends SingleMockBase {
+public class ApixuMockTests extends SingleMockTestBase {
 
     private ApixuWidget apixuWidget = new ApixuWidget();
 

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 
 @Slf4j
-public class ApixuTests extends SingleBase {
+public class ApixuTests extends SingleTestBase {
 
     private ApixuWidget apixuWidget = new ApixuWidget();
 
