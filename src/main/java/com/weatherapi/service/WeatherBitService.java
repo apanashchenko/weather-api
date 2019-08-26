@@ -4,6 +4,7 @@ import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.model.wb.WeatherBitResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -17,6 +18,7 @@ import static com.weatherapi.utils.ResponseConverter.convertResponse;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class WeatherBitService implements WeatherService {
 
 //    private static final String BASE_URL = "https://api.weatherbit.io/v2.0/current?%s&key=1595035ccf514b3cb19a785f58765b44";

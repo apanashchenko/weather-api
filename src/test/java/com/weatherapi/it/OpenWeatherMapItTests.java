@@ -3,25 +3,17 @@ package com.weatherapi.it;
 import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class OpenWeatherMapTests {
+public class OpenWeatherMapItTests extends BaseItTest{
 
-    @Autowired
-    private WebTestClient webClient;
-
-    @Test
-    public void canGetTemperatureByCity() {
-		String city = "dnipro";
+    @ParameterizedTest
+    @MethodSource("com.weatherapi.it.BaseItTest#cities")
+    public void canGetTemperatureByCity(String city) {
 		this.webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/owm/weather")
                         .queryParam("city", city)

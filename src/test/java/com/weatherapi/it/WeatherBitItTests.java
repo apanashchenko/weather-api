@@ -3,27 +3,19 @@ package com.weatherapi.it;
 import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ApixuTests {
+public class WeatherBitItTests extends BaseItTest {
 
-    @Autowired
-    private WebTestClient webClient;
-
-    @Test
-    public void canGetTemperatureByCity() {
-		String city = "dnipro";
+    @ParameterizedTest
+    @MethodSource("com.weatherapi.it.BaseItTest#cities")
+    public void canGetTemperatureByCity(String city) {
 		this.webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/apixu/weather")
+                .uri(uriBuilder -> uriBuilder.path("/wb/weather")
                         .queryParam("city", city)
                         .build())
                 .exchange()
@@ -49,7 +41,7 @@ public class ApixuTests {
         coordinate.setLon(lon);
 
 		this.webClient.post()
-                .uri("/apixu/weather")
+                .uri("/wb/weather")
                 .body(fromObject(coordinate))
                 .exchange()
                 .expectStatus()

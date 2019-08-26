@@ -5,6 +5,7 @@ import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.model.owm.OpenWeatherMapResponse;
 import com.weatherapi.model.wb.WeatherBitResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import static com.weatherapi.utils.ResponseConverter.convertResponse;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class OpenWeatherMapService implements WeatherService{
 
 //    private static final String BASE_URL =
