@@ -26,36 +26,28 @@ public class ApixuMockTests extends SingleMockTestBase {
 
     @BeforeEach
     public void setUpMocks() {
+        log.info("Start up mock");
         when(apixuService.getWeatherByCityName(argThat(matchRequestCity(openWeatherResponse.getCity()))))
                 .thenReturn(openWeatherResponse);
         when(apixuService.getWeatherByCityName(argThat(matchRequestCity(weatherBitResponse.getCity()))))
                 .thenReturn(weatherBitResponse);
         when(apixuService.getWeatherByCityName(argThat(matchRequestCity(apixuResponse.getCity()))))
                 .thenReturn(apixuResponse);
+        log.info("Finish up mock");
     }
 
     @AfterEach
     public void resetMocks() {
+        log.info("Reset mocks");
         Mockito.reset(apixuService);
     }
 
 
     @ParameterizedTest
-    @MethodSource("com.weatherapi.ui.single.mocks.SingleMockBase#cities")
-    public void weatherBitSearchTest(WeatherResponse weatherResponse) {
-        apixuWidget.searchWeather(weatherResponse.getCity());
-
-        log.info("city: {}",  apixuWidget.getCity().text());
-        apixuWidget.getCity().shouldHave(Condition.text(weatherResponse.getCity()));
-
-        log.info("coordinates: {}",  apixuWidget.getCoordinates().text());
-        String coordinates = String.format("lat: %s, lon: %s", weatherResponse.getLat(), weatherResponse.getLon());
-        apixuWidget.getCoordinates().shouldHave(Condition.text(coordinates));
-
-        log.info("temperature: {}",  apixuWidget.getTemperature().text());
-        apixuWidget.getTemperature().shouldHave(Condition.text(String.valueOf(weatherResponse.getTemp())));
-
-        log.info("description: {}",  apixuWidget.getDescription().text());
-        apixuWidget.getDescription().shouldHave(Condition.text(weatherResponse.getDescription()));
+    @MethodSource("com.weatherapi.ui.single.mocks.SingleMockTestBase#cities")
+    public void apixuSearchTest(WeatherResponse weatherResponse) {
+        apixuWidget
+                .searchWeatherByCityName(weatherResponse.getCity())
+                .checkWeather(weatherResponse);
     }
 }

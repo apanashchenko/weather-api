@@ -75,24 +75,10 @@ public class DefaultValuesWeatherMockTests {
         );
     }
 
-
     @ParameterizedTest(name = "{index} ==> widgetId={0} => response => {1}")
     @MethodSource("widgets")
     public void checkWidgetsDefaultValues(BaseWidget widget, WeatherResponse weatherResponse) {
-        widget.getCity().waitUntil(Condition.not(Condition.empty), 5000);
-        log.info("city: {}", widget.getCity().text());
-        widget.getCity().shouldHave(Condition.text(weatherResponse.getCity()));
-
-        log.info("coordinates: {}", widget.getCoordinates().text());
-        String coordinates = String.format("lat: %s, lon: %s", weatherResponse.getLat(), weatherResponse.getLon());
-
-        widget.getCoordinates().shouldHave(Condition.text(coordinates));
-
-        log.info("temperature: {}", widget.getTemperature().text());
-        widget.getTemperature().shouldHave(Condition.text(String.valueOf(weatherResponse.getTemp())));
-
-        log.info("description: {}", widget.getDescription().text());
-        widget.getDescription().shouldHave(Condition.text(weatherResponse.getDescription()));
+        widget.load().checkWeather(weatherResponse);
     }
 
 }

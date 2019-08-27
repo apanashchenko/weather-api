@@ -12,11 +12,6 @@ public class OpenWeatherWidget extends BaseWidget<OpenWeatherWidget>  {
         super($("#owmWidget"), $("#searchFormOwp"));
     }
 
-    public OpenWeatherWidget searchWeather(String city) {
-        searchWeatherByCityName(city);
-        return this;
-    }
-
     @Override
     public String toString() {
         return "OpenWeatherWidget";

@@ -11,11 +11,6 @@ public class WeatherBitWidget extends BaseWidget<WeatherBitWidget> {
         super($("#wbWidget"), $("#searchFormWb"));
     }
 
-    public WeatherBitWidget searchWeather(String city) {
-        searchWeatherByCityName(city);
-        return this;
-    }
-
     @Override
     public String toString() {
         return "WeatherBitWidget";

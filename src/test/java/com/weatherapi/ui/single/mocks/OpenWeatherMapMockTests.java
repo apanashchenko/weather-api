@@ -1,6 +1,5 @@
 package com.weatherapi.ui.single.mocks;
 
-import com.codeborne.selenide.Condition;
 import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.pages.OpenWeatherWidget;
 import com.weatherapi.service.OpenWeatherMapService;
@@ -40,21 +39,10 @@ public class OpenWeatherMapMockTests extends SingleMockTestBase {
     }
 
     @ParameterizedTest
-    @MethodSource("com.weatherapi.ui.single.mocks.SingleMockBase#cities")
+    @MethodSource("com.weatherapi.ui.single.mocks.SingleMockTestBase#cities")
     public void openWidgetMapSearchTest(WeatherResponse weatherResponse) {
-        openWeatherWidget.searchWeather(weatherResponse.getCity());
-
-        log.info("city: {}",  openWeatherWidget.getCity().text());
-        openWeatherWidget.getCity().shouldHave(Condition.text(weatherResponse.getCity()));
-
-        log.info("coordinates: {}",  openWeatherWidget.getCoordinates().text());
-        String coordinates = String.format("lat: %s, lon: %s", weatherResponse.getLat(), weatherResponse.getLon());
-        openWeatherWidget.getCoordinates().shouldHave(Condition.text(coordinates));
-
-        log.info("temperature: {}",  openWeatherWidget.getTemperature().text());
-        openWeatherWidget.getTemperature().shouldHave(Condition.text(String.valueOf(weatherResponse.getTemp())));
-
-        log.info("description: {}",  openWeatherWidget.getDescription().text());
-        openWeatherWidget.getDescription().shouldHave(Condition.text(weatherResponse.getDescription()));
+        openWeatherWidget
+                .searchWeatherByCityName(weatherResponse.getCity())
+                .checkWeather(weatherResponse);
     }
 }

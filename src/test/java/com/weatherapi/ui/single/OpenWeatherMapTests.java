@@ -18,7 +18,7 @@ public class OpenWeatherMapTests extends SingleTestBase {
         String expectedTemperature = "25";
         String expectedDescription = "clear sky";
 
-        openWeatherWidget.load().searchWeather(expectedCity);
+        openWeatherWidget.load().searchWeatherByCityName(expectedCity);
 
         log.info("city: {}",  openWeatherWidget.getCity().text());
         openWeatherWidget.getCity().shouldHave(Condition.text(expectedCity));
