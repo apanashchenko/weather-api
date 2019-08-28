@@ -1,6 +1,5 @@
 package com.weatherapi.ui.single.mocks;
 
-import com.codeborne.selenide.Condition;
 import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.pages.ApixuWidget;
 import com.weatherapi.service.ApixuService;
@@ -12,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 
@@ -27,12 +26,9 @@ public class ApixuMockTests extends SingleMockTestBase {
     @BeforeEach
     public void setUpMocks() {
         log.info("Start up mock");
-        when(apixuService.getWeatherByCityName(argThat(matchRequestCity(openWeatherResponse.getCity()))))
-                .thenReturn(openWeatherResponse);
-        when(apixuService.getWeatherByCityName(argThat(matchRequestCity(weatherBitResponse.getCity()))))
-                .thenReturn(weatherBitResponse);
-        when(apixuService.getWeatherByCityName(argThat(matchRequestCity(apixuResponse.getCity()))))
-                .thenReturn(apixuResponse);
+        when(apixuService.getWeatherByCityName(eq(openWeatherResponse.getCity()))).thenReturn(openWeatherResponse);
+        when(apixuService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
+        when(apixuService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
         log.info("Finish up mock");
     }
 

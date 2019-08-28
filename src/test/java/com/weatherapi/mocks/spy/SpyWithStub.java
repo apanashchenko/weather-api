@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 
@@ -26,7 +27,7 @@ public class SpyWithStub {
     }
 
     @Test
-    public void getByIndexTestSuccess() {
+    public void getByIndexEqualToTest() {
         String item = "trololo";
         doReturn(item).when(spyList).get(1);
 
@@ -34,15 +35,15 @@ public class SpyWithStub {
     }
 
     @Test
-    public void getByIndexTestFail() {
+    public void getByIndexNotEqualToTest() {
         String item = "trololo";
         doReturn(item).when(spyList).get(1);
 
-        assertThat(spyList.get(1)).isEqualTo("blabla");
+        assertThat(spyList.get(1)).isNotEqualTo("blabla");
     }
 
     @Test
-    public void containsItemTestSuccess() {
+    public void containsItemTest() {
         String item = "trololo";
         doReturn(true).when(spyList).contains(item);
 
@@ -50,15 +51,15 @@ public class SpyWithStub {
     }
 
     @Test
-    public void containsItemTestFail() {
+    public void notContainsItemTes() {
         String item = "trololo";
         doReturn(true).when(spyList).contains(item);
 
-        assertThat(spyList.contains("blabla")).isTrue();
+        assertThat(spyList.contains("blabla")).isFalse();
     }
 
     @Test
-    public void addItemTestSuccess() {
+    public void addItemTest() {
         String item = "trololo";
         doAnswer(invocation -> null).when(spyList).add(1, item);
 
@@ -66,8 +67,12 @@ public class SpyWithStub {
     }
 
     @Test
-    public void addItemTestFail() {
+    public void addItemNotStubbedTest() {
         String item = "trololo";
-        spyList.add(1, item);
+
+        assertThatThrownBy(() -> spyList.add(1, item))
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessage("Index: 1, Size: 0");
+        ;
     }
 }

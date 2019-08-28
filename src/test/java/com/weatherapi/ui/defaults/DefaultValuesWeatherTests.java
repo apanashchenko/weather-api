@@ -30,17 +30,8 @@ public class DefaultValuesWeatherTests extends DefaultTestBase {
     @MethodSource("widgets")
     public void checkWidgetsDefaultValues(BaseWidget widget, String city, String coordinates,
                                           String temp, String description) {
-        widget.load(city);
-        log.info("city: {}", widget.getCity().text());
-        widget.getCity().shouldHave(Condition.text(city));
 
-        log.info("coordinates: {}", widget.getCoordinates().text());
-        widget.getCoordinates().shouldHave(Condition.text(coordinates));
-
-        log.info("temperature: {}", widget.getTemperature().text());
-        widget.getTemperature().shouldHave(Condition.text(temp));
-
-        log.info("description: {}", widget.getDescription().text());
-        widget.getDescription().shouldHave(Condition.text(description));
+        widget.load(city)
+                .checkWeather(city, coordinates, temp, description);
     }
 }

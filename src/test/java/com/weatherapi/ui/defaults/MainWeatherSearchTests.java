@@ -1,6 +1,5 @@
 package com.weatherapi.ui.defaults;
 
-import com.codeborne.selenide.Condition;
 import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.pages.ApixuWidget;
 import com.weatherapi.pages.MainSearchForm;
@@ -37,29 +36,13 @@ public class MainWeatherSearchTests extends DefaultTestBase {
     @MethodSource("widgets")
     public void checkWidgetsDefaultValues(String city, WeatherResponse owp, WeatherResponse wb, WeatherResponse apixu) {
         mainSearchForm.searchWeather(city);
-        openWeatherWidget.load(city);
-        weatherBitWidget.load(city);
-        apixuWidget.load(city);
 
-        openWeatherWidget.getCity().shouldHave(Condition.text(city));
-        weatherBitWidget.getCity().shouldHave(Condition.text(city));
-        apixuWidget.getCity().shouldHave(Condition.text(city));
+        openWeatherWidget.load(city).checkWeather(owp);
 
-        openWeatherWidget.getCoordinates().shouldHave(Condition.text(getCoordinates(owp)));
-        weatherBitWidget.getCoordinates().shouldHave(Condition.text(getCoordinates(wb)));
-        apixuWidget.getCoordinates().shouldHave(Condition.text(getCoordinates(apixu)));
+        weatherBitWidget.load(city).checkWeather(owp);
 
-        openWeatherWidget.getTemperature().shouldHave(Condition.text(String.valueOf(owp.getTemp())));
-        weatherBitWidget.getTemperature().shouldHave(Condition.text(String.valueOf(wb.getTemp())));
-        apixuWidget.getTemperature().shouldHave(Condition.text(String.valueOf(apixu.getTemp())));
+        apixuWidget.load(city).checkWeather(owp);
 
-        openWeatherWidget.getDescription().shouldHave(Condition.text(owp.getDescription()));
-        weatherBitWidget.getDescription().shouldHave(Condition.text(wb.getDescription()));
-        apixuWidget.getDescription().shouldHave(Condition.text(apixu.getDescription()));
-    }
-
-    private String getCoordinates(WeatherResponse response) {
-        return String.format("lat: %s, lon: %s", response.getLat(), response.getLon());
     }
 
     private WeatherResponse getOwmBerlinResponse() {

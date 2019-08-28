@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 
@@ -25,12 +25,11 @@ public class OpenWeatherMapMockTests extends SingleMockTestBase {
 
     @BeforeEach
     public void setUpMocks() {
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchRequestCity(openWeatherResponse.getCity()))))
+        when(openWeatherMapService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchRequestCity(weatherBitResponse.getCity()))))
+        when(openWeatherMapService.getWeatherByCityName(eq(weatherBitResponse.getCity())))
                 .thenReturn(weatherBitResponse);
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchRequestCity(apixuResponse.getCity()))))
-                .thenReturn(apixuResponse);
+        when(openWeatherMapService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
     }
 
     @AfterEach

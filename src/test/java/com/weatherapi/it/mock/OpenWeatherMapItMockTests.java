@@ -64,7 +64,7 @@ public class OpenWeatherMapItMockTests {
 
     @Test
     public void canGetTemperatureByCityWithSpecificParameter() {
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchCity(openWeatherResponse.getCity()))))
+        when(openWeatherMapService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
 
         this.webClient.get()
@@ -86,7 +86,7 @@ public class OpenWeatherMapItMockTests {
 
     @Test
     public void canNotGetTemperatureByCityWithSpecificParameter() {
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchCity(openWeatherResponse.getCity()))))
+        when(openWeatherMapService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
 
         this.webClient.get()
@@ -124,8 +124,7 @@ public class OpenWeatherMapItMockTests {
     public void canGetTemperatureByCoordinatesWithSpecificQuery() {
         CityCoordinate coordinate = new CityCoordinate(1.1, 2.2);
 
-        when(openWeatherMapService.getWeatherByGeographicCoordinates(argThat(matchCoordinate(coordinate))))
-                .thenReturn(openWeatherResponse);
+        when(openWeatherMapService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(openWeatherResponse);
         this.webClient.post()
                 .uri("/owm/weather")
                 .body(fromObject(coordinate))
@@ -145,9 +144,8 @@ public class OpenWeatherMapItMockTests {
     @Test
     public void canNotGetTemperatureByCoordinatesWithSpecificQuery() {
         CityCoordinate coordinate = new CityCoordinate(1.1, 2.2);
+        when(openWeatherMapService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(openWeatherResponse);
 
-        when(openWeatherMapService.getWeatherByGeographicCoordinates(argThat(matchCoordinate(coordinate))))
-                .thenReturn(openWeatherResponse);
         this.webClient.post()
                 .uri("/owm/weather")
                 .body(fromObject(new CityCoordinate(-1.1, -2.2)))
@@ -157,14 +155,5 @@ public class OpenWeatherMapItMockTests {
                 .expectBody(WeatherResponse.class)
                 .value(response -> assertThat(response).isNull());
 }
-
-    protected ArgumentMatcher<String> matchCity(final String city) {
-        return arg -> Objects.nonNull(city) && city.equals(arg);
-    }
-
-    protected ArgumentMatcher<CityCoordinate> matchCoordinate(final CityCoordinate cityCoordinate) {
-        return arg -> Objects.nonNull(cityCoordinate) && cityCoordinate.equals(arg);
-    }
-
 
 }

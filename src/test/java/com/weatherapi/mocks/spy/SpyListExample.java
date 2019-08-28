@@ -34,6 +34,6 @@ public class SpyListExample {
     public void getByNegativeIndexTest() {
         assertThatThrownBy(() -> spyList.get(-35))
                 .isInstanceOf(IndexOutOfBoundsException.class)
-                .hasMessageContaining("-35");
+                .hasMessage("-35");
     }
 }

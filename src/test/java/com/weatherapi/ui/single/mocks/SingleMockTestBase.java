@@ -7,12 +7,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.provider.Arguments;
-import org.mockito.ArgumentMatcher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Objects;
 import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Selenide.close;
@@ -44,10 +42,6 @@ public class SingleMockTestBase {
     @AfterAll
     public void tearDown() {
         close();
-    }
-
-    protected ArgumentMatcher<String> matchRequestCity(final String city) {
-        return arg -> Objects.nonNull(city) && city.equals(arg);
     }
 
     protected Stream<Arguments> cities() {

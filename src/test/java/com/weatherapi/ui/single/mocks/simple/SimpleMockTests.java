@@ -14,20 +14,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Objects;
-
 import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.open;
 import static com.weatherapi.MockWeatherFactory.*;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 
@@ -74,26 +71,19 @@ public class SimpleMockTests {
 
     @Test
     public void apixuSearchWithAnyValueTest() {
-//        Mock response value
         when(apixuService.getWeatherByCityName(anyString())).thenReturn(apixuResponse);
 
         apixuWidget
-//        Search any city on UI
                 .searchWeatherByCityName("blabla")
-//        Do some asserts
                 .checkWeather(apixuResponse);
     }
 
     @Test
     public void apixuSearchWithPredefineValueTest() {
-//        Mock response for specific value
-        when(apixuService.getWeatherByCityName(argThat(matchRequestCity(apixuResponse.getCity()))))
-                .thenReturn(apixuResponse);
+        when(apixuService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
 
         apixuWidget
-//        Search specific city on UI
                 .searchWeatherByCityName(apixuResponse.getCity())
-//        Do some asserts
                 .checkWeather(apixuResponse);
     }
 
@@ -108,7 +98,7 @@ public class SimpleMockTests {
 
     @Test
     public void openWidgetMapSearchWithPredefineValueTest() {
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchRequestCity(openWeatherResponse.getCity()))))
+        when(openWeatherMapService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
 
         openWeatherWidget
@@ -127,15 +117,11 @@ public class SimpleMockTests {
 
     @Test
     public void weatherBitSearchWithPredefineValueTest() {
-        when(weatherBitService.getWeatherByCityName(argThat(matchRequestCity(weatherBitResponse.getCity()))))
+        when(weatherBitService.getWeatherByCityName(eq(weatherBitResponse.getCity())))
                 .thenReturn(weatherBitResponse);
 
         weatherBitWidget
                 .searchWeatherByCityName(weatherBitResponse.getCity())
                 .checkWeather(weatherBitResponse);
-    }
-
-    private ArgumentMatcher<String> matchRequestCity(final String city) {
-        return arg -> Objects.nonNull(city) && city.equals(arg);
     }
 }

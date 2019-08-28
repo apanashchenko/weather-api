@@ -1,6 +1,5 @@
 package com.weatherapi.ui.single.mocks;
 
-import com.codeborne.selenide.Condition;
 import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.pages.WeatherBitWidget;
 import com.weatherapi.service.WeatherBitService;
@@ -27,12 +26,10 @@ public class WeatherBitMockTests extends SingleMockTestBase {
     @BeforeEach
     public void setUpMocks() {
         log.info("Start up mock");
-        when(weatherBitService.getWeatherByCityName(argThat(matchRequestCity(openWeatherResponse.getCity()))))
+        when(weatherBitService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
-        when(weatherBitService.getWeatherByCityName(argThat(matchRequestCity(weatherBitResponse.getCity()))))
-                .thenReturn(weatherBitResponse);
-        when(weatherBitService.getWeatherByCityName(argThat(matchRequestCity(apixuResponse.getCity()))))
-                .thenReturn(apixuResponse);
+        when(weatherBitService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
+        when(weatherBitService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
         log.info("Finish up mock");
     }
 

@@ -20,20 +20,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Objects;
 import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.params.provider.Arguments.of;
-import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -71,26 +69,17 @@ public class MainWeatherSearchMockTests {
 
     @BeforeEach
     public void setUpMocks() {
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchRequestCity(BERLIN))))
-                .thenReturn(getOwmBerlinResponse());
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchRequestCity(PARIS))))
-                .thenReturn(getOwmParisResponse());
-        when(openWeatherMapService.getWeatherByCityName(argThat(matchRequestCity(LONDON))))
-                .thenReturn(getOwmLondonResponse());
+        when(openWeatherMapService.getWeatherByCityName(eq(BERLIN))).thenReturn(getOwmBerlinResponse());
+        when(openWeatherMapService.getWeatherByCityName(eq(PARIS))).thenReturn(getOwmParisResponse());
+        when(openWeatherMapService.getWeatherByCityName(eq(LONDON))).thenReturn(getOwmLondonResponse());
 
-        when(weatherBitService.getWeatherByCityName(argThat(matchRequestCity(BERLIN))))
-                .thenReturn(getWbBerlinResponse());
-        when(weatherBitService.getWeatherByCityName(argThat(matchRequestCity(PARIS))))
-                .thenReturn(getWbParisResponse());
-        when(weatherBitService.getWeatherByCityName(argThat(matchRequestCity(LONDON))))
-                .thenReturn(getWbLondonResponse());
+        when(weatherBitService.getWeatherByCityName(eq(BERLIN))).thenReturn(getWbBerlinResponse());
+        when(weatherBitService.getWeatherByCityName(eq(PARIS))).thenReturn(getWbParisResponse());
+        when(weatherBitService.getWeatherByCityName(eq(LONDON))).thenReturn(getWbLondonResponse());
 
-        when(apixuService.getWeatherByCityName(argThat(matchRequestCity(BERLIN))))
-                .thenReturn(getApixuBerlinResponse());
-        when(apixuService.getWeatherByCityName(argThat(matchRequestCity(PARIS))))
-                .thenReturn(getApixuParisResponse());
-        when(apixuService.getWeatherByCityName(argThat(matchRequestCity(LONDON))))
-                .thenReturn(getApixuLondonResponse());
+        when(apixuService.getWeatherByCityName(eq(BERLIN))).thenReturn(getApixuBerlinResponse());
+        when(apixuService.getWeatherByCityName(eq(PARIS))).thenReturn(getApixuParisResponse());
+        when(apixuService.getWeatherByCityName(eq(LONDON))).thenReturn(getApixuLondonResponse());
     }
 
     @AfterEach
@@ -122,10 +111,6 @@ public class MainWeatherSearchMockTests {
         weatherBitWidget.load(city).checkWeather(wb);
 
         apixuWidget.load(city).checkWeather(apixu);
-    }
-
-    protected ArgumentMatcher<String> matchRequestCity(final String city) {
-        return arg -> Objects.nonNull(city) && city.equals(arg);
     }
 
     private WeatherResponse getOwmBerlinResponse() {

@@ -1,6 +1,5 @@
 package com.weatherapi.ui.single;
 
-import com.codeborne.selenide.Condition;
 import com.weatherapi.pages.OpenWeatherWidget;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -18,18 +17,8 @@ public class OpenWeatherMapTests extends SingleTestBase {
         String expectedTemperature = "25";
         String expectedDescription = "clear sky";
 
-        openWeatherWidget.load().searchWeatherByCityName(expectedCity);
-
-        log.info("city: {}",  openWeatherWidget.getCity().text());
-        openWeatherWidget.getCity().shouldHave(Condition.text(expectedCity));
-
-        log.info("coordinates: {}",  openWeatherWidget.getCoordinates().text());
-        openWeatherWidget.getCoordinates().shouldHave(Condition.text(expectedCoords));
-
-        log.info("temperature: {}",  openWeatherWidget.getTemperature().text());
-        openWeatherWidget.getTemperature().shouldHave(Condition.text(expectedTemperature));
-
-        log.info("description: {}",  openWeatherWidget.getDescription().text());
-        openWeatherWidget.getDescription().shouldHave(Condition.text(expectedDescription));
+        openWeatherWidget.load()
+                .searchWeatherByCityName(expectedCity)
+                .checkWeather(expectedCity, expectedCoords, expectedTemperature, expectedDescription);
     }
 }
