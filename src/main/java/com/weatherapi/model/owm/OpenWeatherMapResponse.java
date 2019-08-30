@@ -1,6 +1,8 @@
 package com.weatherapi.model.owm;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.weatherapi.model.Joke;
 import lombok.Data;
 
 import java.util.List;
@@ -34,4 +36,6 @@ public class OpenWeatherMapResponse {
     private String name;
     @JsonProperty("cod")
     private Integer cod;
+    @JsonIgnore
+    private Joke joke;
 }

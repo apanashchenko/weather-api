@@ -9,13 +9,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
-public class WeatherBitItTests extends BaseItTest {
+public class ApixuControllerItTests extends BaseItTest {
 
     @ParameterizedTest
     @MethodSource("com.weatherapi.it.BaseItTest#cities")
     public void canGetTemperatureByCity(String city) {
 		this.webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/wb/weather")
+                .uri(uriBuilder -> uriBuilder.path("/apixu/weather")
                         .queryParam("city", city)
                         .build())
                 .exchange()
@@ -41,7 +41,7 @@ public class WeatherBitItTests extends BaseItTest {
         coordinate.setLon(lon);
 
 		this.webClient.post()
-                .uri("/wb/weather")
+                .uri("/apixu/weather")
                 .body(fromObject(coordinate))
                 .exchange()
                 .expectStatus()

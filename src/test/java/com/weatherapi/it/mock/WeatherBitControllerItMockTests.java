@@ -2,7 +2,7 @@ package com.weatherapi.it.mock;
 
 import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.service.ApixuService;
+import com.weatherapi.service.WeatherBitService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import static com.weatherapi.MockWeatherFactory.getApixuResponse;
+import static com.weatherapi.MockWeatherFactory.getWeatherBitResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
@@ -21,28 +21,28 @@ import static org.springframework.web.reactive.function.BodyInserters.fromObject
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ApixuItMockTests {
+public class WeatherBitControllerItMockTests {
 
-    private WeatherResponse weatherBitResponse = getApixuResponse();
+    private WeatherResponse weatherBitResponse = getWeatherBitResponse();
 
     @Autowired
     protected WebTestClient webClient;
 
     @MockBean
-    private ApixuService apixuService;
+    private WeatherBitService weatherBitService;
 
     @BeforeEach
     public void resetMocks() {
-        Mockito.reset(apixuService);
+        Mockito.reset(weatherBitService);
     }
 
 
     @Test
     public void canGetTemperatureByCityWithAnyQueryParameter() {
-        when(apixuService.getWeatherByCityName(anyString())).thenReturn(weatherBitResponse);
+        when(weatherBitService.getWeatherByCityName(anyString())).thenReturn(weatherBitResponse);
 
         this.webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/apixu/weather")
+                .uri(uriBuilder -> uriBuilder.path("/wb/weather")
                         .queryParam("city", "blabla")
                         .build())
                 .exchange()
@@ -61,10 +61,11 @@ public class ApixuItMockTests {
 
     @Test
     public void canGetTemperatureByCityWithSpecificParameter() {
-        when(apixuService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
+        when(weatherBitService.getWeatherByCityName(eq(weatherBitResponse.getCity())))
+                .thenReturn(weatherBitResponse);
 
         this.webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/apixu/weather")
+                .uri(uriBuilder -> uriBuilder.path("/wb/weather")
                         .queryParam("city", weatherBitResponse.getCity())
                         .build())
                 .exchange()
@@ -82,10 +83,11 @@ public class ApixuItMockTests {
 
     @Test
     public void canNotGetTemperatureByCityWithSpecificParameter() {
-        when(apixuService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
+        when(weatherBitService.getWeatherByCityName(eq(weatherBitResponse.getCity())))
+                .thenReturn(weatherBitResponse);
 
         this.webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/apixu/weather")
+                .uri(uriBuilder -> uriBuilder.path("/wb/weather")
                         .queryParam("city", "dnipro")
                         .build())
                 .exchange()
@@ -97,10 +99,10 @@ public class ApixuItMockTests {
 
     @Test
     public void canGetTemperatureByCoordinateAnyQueryParameter() {
-        when(apixuService.getWeatherByGeographicCoordinates(any())).thenReturn(weatherBitResponse);
+        when(weatherBitService.getWeatherByGeographicCoordinates(any())).thenReturn(weatherBitResponse);
 
         this.webClient.post()
-                .uri("/apixu/weather")
+                .uri("/wb/weather")
                 .body(fromObject(new CityCoordinate()))
                 .exchange()
                 .expectStatus()
@@ -118,10 +120,10 @@ public class ApixuItMockTests {
     @Test
     public void canGetTemperatureByCoordinatesWithSpecificQuery() {
         CityCoordinate coordinate = new CityCoordinate(1.1, 2.2);
-        when(apixuService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(weatherBitResponse);
 
+        when(weatherBitService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(weatherBitResponse);
         this.webClient.post()
-                .uri("/apixu/weather")
+                .uri("/wb/weather")
                 .body(fromObject(coordinate))
                 .exchange()
                 .expectStatus()
@@ -139,10 +141,10 @@ public class ApixuItMockTests {
     @Test
     public void canNotGetTemperatureByCoordinatesWithSpecificQuery() {
         CityCoordinate coordinate = new CityCoordinate(1.1, 2.2);
-        when(apixuService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(weatherBitResponse);
+        when(weatherBitService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(weatherBitResponse);
 
         this.webClient.post()
-                .uri("/apixu/weather")
+                .uri("/wb/weather")
                 .body(fromObject(new CityCoordinate(-1.1, -2.2)))
                 .exchange()
                 .expectStatus()

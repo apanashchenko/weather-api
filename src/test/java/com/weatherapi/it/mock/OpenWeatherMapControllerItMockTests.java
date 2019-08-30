@@ -24,7 +24,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromObject
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class OpenWeatherMapItMockTests {
+public class OpenWeatherMapControllerItMockTests {
 
     private WeatherResponse openWeatherResponse = getOpenWeatherResponse();
 

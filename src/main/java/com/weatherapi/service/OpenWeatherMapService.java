@@ -3,15 +3,10 @@ package com.weatherapi.service;
 import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.model.owm.OpenWeatherMapResponse;
-import com.weatherapi.model.wb.WeatherBitResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
@@ -33,17 +28,16 @@ public class OpenWeatherMapService implements WeatherService{
 
     @Override
     public WeatherResponse getWeatherByCityName(String city) {
-        WebClient.ResponseSpec responseSpec = client.get()
+        Mono<OpenWeatherMapResponse> responseSpec = client.get()
                 .uri(getBaseUrl().queryParam("q", city).toUriString())
                 .retrieve()
                 .onStatus(HttpStatus::is4xxClientError, clientResponse ->
                         Mono.error(new RuntimeException(clientResponse.statusCode().getReasonPhrase())))
                 .onStatus(HttpStatus::is5xxServerError, clientResponse ->
-                        Mono.error(new RuntimeException(clientResponse.statusCode().getReasonPhrase())));
+                        Mono.error(new RuntimeException(clientResponse.statusCode().getReasonPhrase())))
+                .bodyToMono(OpenWeatherMapResponse.class);
 
-        OpenWeatherMapResponse openWeatherMapResponse = responseSpec.bodyToMono(OpenWeatherMapResponse.class).block();
-
-        return convertResponse(Objects.requireNonNull(openWeatherMapResponse));
+        return convertResponse(Objects.requireNonNull(responseSpec.block()));
     }
 
     @Override
