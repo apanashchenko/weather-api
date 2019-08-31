@@ -5,10 +5,10 @@ import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.model.wb.WeatherBitResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -25,36 +25,29 @@ public class WeatherBitService implements WeatherService {
     private final WebClient client;
 
     @Override
+    @SuppressWarnings("unchecked")
     public WeatherResponse getWeatherByCityName(String city) {
-        return getWeather(getBaseUrl().queryParam("city", city));
+        Optional<WeatherBitResponse> weatherBitResponse =
+                getWeather(getBaseUrl().queryParam("city", city), client, WeatherBitResponse.class);
+        return weatherBitResponse
+                .map(response -> convertResponse(Objects.requireNonNull(response)))
+                .orElse(null);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public WeatherResponse getWeatherByGeographicCoordinates(CityCoordinate coordinate) {
-        return getWeather(getBaseUrl().queryParam("lat", coordinate.getLat())
-                .queryParam("lon", coordinate.getLon()));
+        Optional<WeatherBitResponse> weatherBitResponse =
+                getWeather(getBaseUrl().queryParam("lat", coordinate.getLat())
+                        .queryParam("lon", coordinate.getLon()), client, WeatherBitResponse.class);
+        return weatherBitResponse
+                .map(response -> convertResponse(Objects.requireNonNull(response)))
+                .orElse(null);
     }
 
 
     private UriComponentsBuilder getBaseUrl() {
         return UriComponentsBuilder.fromUriString(BASE_URL).queryParam("key", WB_KEY);
-    }
-
-    private WeatherResponse getWeather(UriComponentsBuilder uriComponentsBuilder) {
-        Optional<WeatherBitResponse> weatherBitResponse = client.get()
-                .uri(uriComponentsBuilder.toUriString())
-                .exchange()
-                .flatMap(resp -> {
-                    if (resp.statusCode().is2xxSuccessful()) {
-                        return resp.bodyToMono(WeatherBitResponse.class);
-                    } else {
-                        return Mono.empty();
-                    }
-                }).blockOptional();
-
-        return weatherBitResponse
-                .map(response -> convertResponse(Objects.requireNonNull(response)))
-                .orElse(null);
     }
 
 }

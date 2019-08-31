@@ -146,6 +146,6 @@ public class ApixuControllerItMockTests {
                 .expectStatus()
                 .isNotFound();
 
-}
+    }
 
 }

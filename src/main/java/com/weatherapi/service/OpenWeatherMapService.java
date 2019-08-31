@@ -5,10 +5,10 @@ import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.model.owm.OpenWeatherMapResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -26,16 +26,25 @@ public class OpenWeatherMapService implements WeatherService {
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public WeatherResponse getWeatherByCityName(String city) {
-        return getWeather(getBaseUrl().queryParam("q", city));
+        Optional<OpenWeatherMapResponse> openWeatherMapResponseMono =
+                getWeather(getBaseUrl().queryParam("q", city), client, OpenWeatherMapResponse.class);
+        return openWeatherMapResponseMono
+                .map(openWeatherMapResponse -> convertResponse(Objects.requireNonNull(openWeatherMapResponse)))
+                .orElse(null);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public WeatherResponse getWeatherByGeographicCoordinates(CityCoordinate coordinate) {
-        getBaseUrl().build();
-        return getWeather(getBaseUrl()
-                .queryParam("lat", coordinate.getLat())
-                .queryParam("lon", coordinate.getLon()));
+        Optional<OpenWeatherMapResponse> openWeatherMapResponseMono =
+                getWeather(getBaseUrl()
+                        .queryParam("lat", coordinate.getLat())
+                        .queryParam("lon", coordinate.getLon()), client, OpenWeatherMapResponse.class);
+        return openWeatherMapResponseMono
+                .map(openWeatherMapResponse -> convertResponse(Objects.requireNonNull(openWeatherMapResponse)))
+                .orElse(null);
     }
 
 
@@ -43,23 +52,6 @@ public class OpenWeatherMapService implements WeatherService {
         return UriComponentsBuilder.fromUriString(BASE_URL)
                 .queryParam("APPID", OWM_KEY)
                 .queryParam("units", "metric");
-    }
-
-    private WeatherResponse getWeather(UriComponentsBuilder uriComponentsBuilder) {
-        Optional<OpenWeatherMapResponse> openWeatherMapResponseMono = client.get()
-                .uri(uriComponentsBuilder.toUriString())
-                .exchange()
-                .flatMap(resp -> {
-                    if (resp.statusCode().is2xxSuccessful()) {
-                        return resp.bodyToMono(OpenWeatherMapResponse.class);
-                    } else {
-                        return Mono.empty();
-                    }
-                }).blockOptional();
-
-        return openWeatherMapResponseMono
-                .map(openWeatherMapResponse -> convertResponse(Objects.requireNonNull(openWeatherMapResponse)))
-                .orElse(null);
     }
 
 }

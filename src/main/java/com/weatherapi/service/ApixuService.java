@@ -5,10 +5,10 @@ import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.model.apixu.ApixuWeatherResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -25,35 +25,29 @@ public class ApixuService implements WeatherService {
     private final WebClient client;
 
     @Override
+    @SuppressWarnings("unchecked")
     public WeatherResponse getWeatherByCityName(String city) {
-        return getWeather(getBaseUrl().queryParam("q", city));
-    }
-
-    @Override
-    public WeatherResponse getWeatherByGeographicCoordinates(CityCoordinate coordinate) {
-        return getWeather(getBaseUrl().queryParam("q", coordinate.getLat(), coordinate.getLon()));
-    }
-
-    private UriComponentsBuilder getBaseUrl() {
-        return UriComponentsBuilder.fromUriString(BASE_URL).queryParam("key", APIXU_KEY);
-    }
-
-    private WeatherResponse getWeather(UriComponentsBuilder uriComponentsBuilder) {
-        Optional<ApixuWeatherResponse> apixuWeatherResponse = client.get()
-                .uri(uriComponentsBuilder.toUriString())
-                .exchange()
-                .flatMap(resp -> {
-                    if (resp.statusCode().is2xxSuccessful()) {
-                        return resp.bodyToMono(ApixuWeatherResponse.class);
-                    } else {
-                        return Mono.empty();
-                    }
-                }).blockOptional();
-
+        Optional<ApixuWeatherResponse> apixuWeatherResponse =
+                getWeather(getBaseUrl().queryParam("q", city), client, ApixuWeatherResponse.class);
         return apixuWeatherResponse
                 .map(response -> convertResponse(Objects.requireNonNull(response)))
                 .orElse(null);
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public WeatherResponse getWeatherByGeographicCoordinates(CityCoordinate coordinate) {
+        Optional<ApixuWeatherResponse> apixuWeatherResponse =
+                getWeather(getBaseUrl().queryParam("q", coordinate.getLat(), coordinate.getLon()),
+                        client, ApixuWeatherResponse.class);
+        return apixuWeatherResponse
+                .map(response -> convertResponse(Objects.requireNonNull(response)))
+                .orElse(null);
+    }
+
+
+    private UriComponentsBuilder getBaseUrl() {
+        return UriComponentsBuilder.fromUriString(BASE_URL).queryParam("key", APIXU_KEY);
+    }
 
 }
