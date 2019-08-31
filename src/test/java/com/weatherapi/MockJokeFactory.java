@@ -2,7 +2,6 @@ package com.weatherapi;
 
 import com.weatherapi.model.Joke;
 import com.weatherapi.model.JokeValue;
-import com.weatherapi.model.WeatherResponse;
 
 import java.util.Arrays;
 

@@ -3,7 +3,6 @@ package com.weatherapi.service;
 import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.model.apixu.ApixuWeatherResponse;
-import com.weatherapi.model.owm.OpenWeatherMapResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
