@@ -92,9 +92,7 @@ public class WeatherBitControllerItMockTests {
                         .build())
                 .exchange()
                 .expectStatus()
-                .isOk()
-                .expectBody(WeatherResponse.class)
-                .value(response -> assertThat(response).isNull());
+                .isNotFound();
     }
 
     @Test
@@ -148,9 +146,7 @@ public class WeatherBitControllerItMockTests {
                 .body(fromObject(new CityCoordinate(-1.1, -2.2)))
                 .exchange()
                 .expectStatus()
-                .isOk()
-                .expectBody(WeatherResponse.class)
-                .value(response -> assertThat(response).isNull());
+                .isNotFound();
 
 }
 

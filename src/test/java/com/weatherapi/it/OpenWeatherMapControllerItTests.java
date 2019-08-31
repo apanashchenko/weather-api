@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
-public class OpenWeatherMapControllerItTests extends BaseItTest{
+public class OpenWeatherMapControllerItTests extends BaseItTest {
 
     @ParameterizedTest
     @MethodSource("com.weatherapi.it.BaseItTest#cities")

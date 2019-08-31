@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class BaseWidget<T extends BaseWidget> {
 
-    public static final int UI_TIMEOUT = 5000;
+    public static final long UI_TIMEOUT = 5000L;
     private SelenideElement widget;
     private SelenideElement searchFrom;
 
