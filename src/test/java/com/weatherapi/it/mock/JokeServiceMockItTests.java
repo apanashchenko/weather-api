@@ -52,4 +52,15 @@ public class JokeServiceMockItTests extends BaseItTest {
                     assertThat(value.getCategories()).isEqualTo(jokeResponse.getValue().getCategories());
                 });
     }
+
+    @Test
+    public void canNotFoundJokeTest() {
+        when(jokeService.getRandomJoke()).thenReturn(null);
+
+        this.webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/joke").build())
+                .exchange()
+                .expectStatus()
+                .isNotFound();
+    }
 }
