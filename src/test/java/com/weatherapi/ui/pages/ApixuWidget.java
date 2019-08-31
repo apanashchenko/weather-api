@@ -1,5 +1,4 @@
-package com.weatherapi.pages;
-
+package com.weatherapi.ui.pages;
 
 import lombok.extern.slf4j.Slf4j;
 

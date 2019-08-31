@@ -1,5 +1,4 @@
-package com.weatherapi.pages;
-
+package com.weatherapi.ui.pages;
 
 import static com.codeborne.selenide.Selenide.$;
 

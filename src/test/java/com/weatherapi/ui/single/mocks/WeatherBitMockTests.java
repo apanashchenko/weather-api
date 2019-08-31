@@ -1,7 +1,7 @@
 package com.weatherapi.ui.single.mocks;
 
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.pages.WeatherBitWidget;
+import com.weatherapi.ui.pages.WeatherBitWidget;
 import com.weatherapi.service.WeatherBitService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;

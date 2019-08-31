@@ -13,7 +13,7 @@ public class WeatherBitControllerItTests extends BaseItTest {
 
     @ParameterizedTest
     @MethodSource("com.weatherapi.it.BaseItTest#cities")
-    public void canGetTemperatureByCity(String city) {
+    public void canGetTemperatureByCityTest(String city) {
 		this.webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/wb/weather")
                         .queryParam("city", city)
@@ -32,7 +32,18 @@ public class WeatherBitControllerItTests extends BaseItTest {
     }
 
     @Test
-    public void canGetTemperatureByCoordinates() {
+    public void canNotFoundTemperatureByCityTest() {
+        this.webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/wb/weather")
+                        .queryParam("city", "234sdfdf")
+                        .build())
+                .exchange()
+                .expectStatus()
+                .isNotFound();
+    }
+
+    @Test
+    public void canGetTemperatureByCoordinatesTest() {
         double lat = 48.47;
         double lon = 35.04;
 

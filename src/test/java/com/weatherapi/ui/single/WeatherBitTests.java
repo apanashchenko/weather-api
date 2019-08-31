@@ -1,6 +1,6 @@
 package com.weatherapi.ui.single;
 
-import com.weatherapi.pages.WeatherBitWidget;
+import com.weatherapi.ui.pages.WeatherBitWidget;
 import org.junit.jupiter.api.Test;
 
 

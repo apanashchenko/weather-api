@@ -1,6 +1,6 @@
 package com.weatherapi.ui.single;
 
-import com.weatherapi.pages.ApixuWidget;
+import com.weatherapi.ui.pages.ApixuWidget;
 import org.junit.jupiter.api.Test;
 
 

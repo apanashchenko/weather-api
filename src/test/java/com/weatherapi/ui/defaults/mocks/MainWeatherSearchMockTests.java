@@ -1,12 +1,11 @@
 package com.weatherapi.ui.defaults.mocks;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.pages.ApixuWidget;
-import com.weatherapi.pages.MainSearchForm;
-import com.weatherapi.pages.OpenWeatherWidget;
-import com.weatherapi.pages.WeatherBitWidget;
+import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.MainSearchForm;
+import com.weatherapi.ui.pages.OpenWeatherWidget;
+import com.weatherapi.ui.pages.WeatherBitWidget;
 import com.weatherapi.service.ApixuService;
 import com.weatherapi.service.OpenWeatherMapService;
 import com.weatherapi.service.WeatherBitService;

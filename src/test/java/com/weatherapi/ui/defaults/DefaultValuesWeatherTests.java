@@ -1,10 +1,9 @@
 package com.weatherapi.ui.defaults;
 
-import com.codeborne.selenide.Condition;
-import com.weatherapi.pages.ApixuWidget;
-import com.weatherapi.pages.BaseWidget;
-import com.weatherapi.pages.OpenWeatherWidget;
-import com.weatherapi.pages.WeatherBitWidget;
+import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.BaseWidget;
+import com.weatherapi.ui.pages.OpenWeatherWidget;
+import com.weatherapi.ui.pages.WeatherBitWidget;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

@@ -1,6 +1,6 @@
 package com.weatherapi.ui.single;
 
-import com.weatherapi.pages.OpenWeatherWidget;
+import com.weatherapi.ui.pages.OpenWeatherWidget;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 

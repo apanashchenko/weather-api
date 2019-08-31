@@ -2,11 +2,8 @@ package com.weatherapi.it;
 
 import com.weatherapi.model.Joke;
 import com.weatherapi.model.JokeValue;
-import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.service.JokeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 

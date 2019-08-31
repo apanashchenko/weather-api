@@ -32,6 +32,17 @@ public class OpenWeatherMapControllerItTests extends BaseItTest{
     }
 
     @Test
+    public void canNotFoundTemperatureByCityTest() {
+        this.webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/owm/weather")
+                        .queryParam("city", "234sdfdf")
+                        .build())
+                .exchange()
+                .expectStatus()
+                .isNotFound();
+    }
+
+    @Test
     public void canGetTemperatureByCoordinates() {
         double lat = 48.47;
         double lon = 35.04;
