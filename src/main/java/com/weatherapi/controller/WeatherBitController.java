@@ -1,5 +1,4 @@
-package com.weatherapi.web;
-
+package com.weatherapi.controller;
 
 import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
@@ -14,7 +13,7 @@ public class WeatherBitController {
 
     private final WeatherBitService weatherBitService;
 
-    @RequestMapping(value = "/wb/weather", method = RequestMethod.GET)
+    @GetMapping("/wb/weather")
     public ResponseEntity<WeatherResponse> getWeatherByCityId(@RequestParam(name = "city") String city) {
         WeatherResponse weatherByCityName = weatherBitService.getWeatherByCityName(city);
         if (weatherByCityName != null) {
@@ -23,7 +22,7 @@ public class WeatherBitController {
         return ResponseEntity.notFound().build();
     }
 
-    @RequestMapping(value = "/wb/weather", method = RequestMethod.POST)
+    @PostMapping("/wb/weather")
     public ResponseEntity<WeatherResponse> getWeatherByGeographicCoordinates(@RequestBody CityCoordinate cityCoordinate) {
         WeatherResponse weatherByGeographicCoordinates = weatherBitService.getWeatherByGeographicCoordinates(cityCoordinate);
         if (weatherByGeographicCoordinates != null) {

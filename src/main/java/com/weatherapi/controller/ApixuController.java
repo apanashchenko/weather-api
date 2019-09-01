@@ -1,5 +1,4 @@
-package com.weatherapi.web;
-
+package com.weatherapi.controller;
 
 import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
@@ -14,7 +13,7 @@ public class ApixuController {
 
     private final ApixuService apixuService;
 
-    @RequestMapping(value = "/apixu/weather", method = RequestMethod.GET)
+    @GetMapping("/apixu/weather")
     public ResponseEntity<WeatherResponse> getWeatherByCityId(@RequestParam(name = "city") String city) {
         WeatherResponse weatherByCityName = apixuService.getWeatherByCityName(city);
         if (weatherByCityName != null) {
@@ -23,7 +22,7 @@ public class ApixuController {
         return  ResponseEntity.notFound().build();
     }
 
-    @RequestMapping(value = "/apixu/weather", method = RequestMethod.POST)
+    @PostMapping("/apixu/weather")
     public ResponseEntity<WeatherResponse> getWeatherByGeographicCoordinates(@RequestBody CityCoordinate cityCoordinate) {
         WeatherResponse weatherByGeographicCoordinates = apixuService.getWeatherByGeographicCoordinates(cityCoordinate);
         if (weatherByGeographicCoordinates != null) {

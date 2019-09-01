@@ -1,5 +1,4 @@
-package com.weatherapi.web;
-
+package com.weatherapi.controller;
 
 import com.weatherapi.model.CityCoordinate;
 import com.weatherapi.model.WeatherResponse;
@@ -14,7 +13,7 @@ public class OpenWeatherMapController {
 
     private final OpenWeatherMapService openWeatherMapService;
 
-    @RequestMapping(value = "/owm/weather", method = RequestMethod.GET)
+    @GetMapping("/owm/weather")
     public ResponseEntity<WeatherResponse> getWeatherByCityId(@RequestParam(name = "city") String city) {
         WeatherResponse weatherByCityName = openWeatherMapService.getWeatherByCityName(city);
         if (weatherByCityName != null) {
@@ -23,7 +22,7 @@ public class OpenWeatherMapController {
         return ResponseEntity.notFound().build();
     }
 
-    @RequestMapping(value = "/owm/weather", method = RequestMethod.POST)
+    @PostMapping("/owm/weather")
     public ResponseEntity<WeatherResponse> getWeatherByGeographicCoordinates(@RequestBody CityCoordinate cityCoordinate) {
         WeatherResponse weatherByCityName = openWeatherMapService.getWeatherByGeographicCoordinates(cityCoordinate);
         if (weatherByCityName != null) {
