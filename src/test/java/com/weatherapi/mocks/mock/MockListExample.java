@@ -11,6 +11,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doAnswer;
 
 /**
  * Created by alpa on 2019-08-22
@@ -35,8 +37,9 @@ public class MockListExample {
 
     @Test
     public void addAndGetByIndexMockTest() {
-        mockedList.add("234");
-        assertThat(mockedList.get(0)).isNull();
+        String item = "234";
+        mockedList.add(item);
+        assertThat(mockedList.get(0)).isEqualTo(item);
     }
 
     @Test
@@ -98,5 +101,29 @@ public class MockListExample {
         String item = "blabla";
         realList.add(item);
         assertThat(realList.contains(item)).isTrue();
+    }
+
+    @Test
+    public void sizeTest() {
+        String item = "blabla";
+        String item2 = "trololo";
+        String item3 = "hophey";
+        realList.add(item);
+        realList.add(item2);
+        realList.add(item3);
+        assertThat(realList.size()).isEqualTo(3);
+    }
+
+    @Test
+    public void doAnswerTest() {
+        String item = "blabla";
+        String item2 = "trololo";
+        doAnswer(invocation -> {
+            int argument = invocation.getArgument(0);
+            return argument < 5 ? item : item2;
+        }).when(mockedList).get(anyInt());
+
+        assertThat(mockedList.get(3)).isEqualTo(item);
+        assertThat(mockedList.get(8)).isEqualTo(item2);
     }
 }
