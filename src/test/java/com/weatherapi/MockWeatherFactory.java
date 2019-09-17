@@ -30,8 +30,8 @@ public class MockWeatherFactory {
 
     public static WeatherResponse getWeatherStackResponse() {
         WeatherResponse weatherResponse = new WeatherResponse();
-        weatherResponse.setCity("Apixu City");
-        weatherResponse.setDescription("Apixu cool");
+        weatherResponse.setCity("WS City");
+        weatherResponse.setDescription("WS super");
         weatherResponse.setTemp(31.1);
         weatherResponse.setLat(11.21);
         weatherResponse.setLon(22.22);

@@ -11,11 +11,11 @@ import static com.codeborne.selenide.Selenide.$;
 public class WeatherStackWidget extends BaseWidget<WeatherStackWidget> {
 
     public WeatherStackWidget() {
-        super($("#apixuWidget"), $("#searchFormApixu"));
+        super($("#wsWidget"), $("#searchFormWs"));
     }
 
     @Override
     public String toString() {
-        return "ApixuWidget";
+        return "WeatherStackWidget";
     }
 }
