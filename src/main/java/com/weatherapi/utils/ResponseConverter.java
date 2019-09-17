@@ -11,6 +11,8 @@ import com.weatherapi.model.owm.Weather;
 import com.weatherapi.model.wb.Datum;
 import com.weatherapi.model.wb.WeatherBitResponse;
 
+import java.util.stream.Collectors;
+
 public class ResponseConverter {
 
 
@@ -22,7 +24,7 @@ public class ResponseConverter {
         weatherResponse.setLon(location.getLon());
 
         Current current = weatherStackResponse.getCurrent();
-        weatherResponse.setDescription(current.getWeatherDescriptions().toString());
+        weatherResponse.setDescription(String.join("", current.getWeatherDescriptions()));
         weatherResponse.setTemp(current.getTemperature());
 
         return weatherResponse;

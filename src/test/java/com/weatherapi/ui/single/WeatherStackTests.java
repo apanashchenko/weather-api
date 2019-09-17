@@ -11,9 +11,9 @@ public class WeatherStackTests extends SingleTestBase {
     @Test
     public void weatherStackWidgetSearchTest() {
         String expectedCity = "New York";
-        String expectedCoords = "lat: 40.71, lon: -74.01";
-        String expectedTemperature = "17.2";
-        String expectedDescription = "Partly cloudy";
+        String expectedCoords = "lat: 40.714, lon: -74.006";
+        String expectedTemperature = "17.0";
+        String expectedDescription = "Sunny";
 
         weatherStackWidget
                 .load()
