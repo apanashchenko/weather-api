@@ -2,11 +2,11 @@ package com.weatherapi.ui.single.mocks.simple;
 
 import com.codeborne.selenide.Configuration;
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import com.weatherapi.ui.pages.BaseWidget;
 import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.ui.pages.WeatherBitWidget;
-import com.weatherapi.service.ApixuService;
+import com.weatherapi.service.WeatherStackService;
 import com.weatherapi.service.OpenWeatherMapService;
 import com.weatherapi.service.WeatherBitService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,7 @@ import static org.mockito.Mockito.when;
 @Slf4j
 public class SimpleMockParametrizeTests {
 
-    private ApixuWidget apixuWidget = new ApixuWidget();
+    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
     private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
 
@@ -53,7 +53,7 @@ public class SimpleMockParametrizeTests {
     private String baseUrl;
 
     @MockBean
-    private ApixuService apixuService;
+    private WeatherStackService weatherStackService;
 
     @MockBean
     private OpenWeatherMapService openWeatherMapService;
@@ -75,14 +75,14 @@ public class SimpleMockParametrizeTests {
                 .thenReturn(openWeatherResponse);
         when(weatherBitService.getWeatherByCityName(eq(weatherBitResponse.getCity())))
                 .thenReturn(weatherBitResponse);
-        when(apixuService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
+        when(weatherStackService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
         log.info("Finish up mocks");
     }
 
     @AfterEach
     public void resetMocks() {
         log.info("Reset mocks");
-        Mockito.reset(apixuService, openWeatherMapService, weatherBitService);
+        Mockito.reset(weatherStackService, openWeatherMapService, weatherBitService);
     }
 
     @AfterAll
@@ -94,7 +94,7 @@ public class SimpleMockParametrizeTests {
         return Stream.of(
                 of(openWeatherWidget, openWeatherResponse),
                 of(weatherBitWidget, weatherBitResponse),
-                of(apixuWidget, apixuResponse)
+                of(weatherStackWidget, apixuResponse)
         );
     }
 

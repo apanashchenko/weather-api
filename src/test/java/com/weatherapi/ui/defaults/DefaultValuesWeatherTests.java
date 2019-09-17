@@ -1,6 +1,6 @@
 package com.weatherapi.ui.defaults;
 
-import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import com.weatherapi.ui.pages.BaseWidget;
 import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.ui.pages.WeatherBitWidget;
@@ -20,7 +20,7 @@ public class DefaultValuesWeatherTests extends DefaultTestBase {
         return Stream.of(
                 of(new OpenWeatherWidget(), "Dnipro", "lat: 48.47, lon: 35.04", "31", "clear sky"),
                 of(new WeatherBitWidget(), "Sydney", " lat: 46.1351, lon: -60.1831", "11", "overcast clouds"),
-                of(new ApixuWidget(), "Los Angeles", "lat: 34.05, lon: -118.24", "21.1", "clear")
+                of(new WeatherStackWidget(), "Los Angeles", "lat: 34.05, lon: -118.24", "21.1", "clear")
         );
     }
 

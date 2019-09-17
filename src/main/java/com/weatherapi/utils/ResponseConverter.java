@@ -1,7 +1,7 @@
 package com.weatherapi.utils;
 
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.model.apixu.ApixuWeatherResponse;
+import com.weatherapi.model.apixu.WeatherStackResponse;
 import com.weatherapi.model.apixu.Current;
 import com.weatherapi.model.apixu.Location;
 import com.weatherapi.model.owm.Coord;
@@ -14,16 +14,16 @@ import com.weatherapi.model.wb.WeatherBitResponse;
 public class ResponseConverter {
 
 
-    public static WeatherResponse convertResponse(ApixuWeatherResponse apixuWeatherResponse) {
+    public static WeatherResponse convertResponse(WeatherStackResponse weatherStackResponse) {
         WeatherResponse weatherResponse = new WeatherResponse();
-        Location location = apixuWeatherResponse.getLocation();
+        Location location = weatherStackResponse.getLocation();
         weatherResponse.setCity(location.getName());
         weatherResponse.setLat(location.getLat());
         weatherResponse.setLon(location.getLon());
 
-        Current current = apixuWeatherResponse.getCurrent();
-        weatherResponse.setDescription(current.getCondition().getText());
-        weatherResponse.setTemp(current.getTempC());
+        Current current = weatherStackResponse.getCurrent();
+        weatherResponse.setDescription(current.getWeatherDescriptions().toString());
+        weatherResponse.setTemp(current.getTemperature());
 
         return weatherResponse;
     }

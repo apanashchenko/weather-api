@@ -8,18 +8,20 @@ public class Location {
 
     @JsonProperty("name")
     private String name;
-    @JsonProperty("region")
-    private String region;
     @JsonProperty("country")
     private String country;
+    @JsonProperty("region")
+    private String region;
     @JsonProperty("lat")
-    private Double lat;
+    private double lat;
     @JsonProperty("lon")
-    private Double lon;
-    @JsonProperty("tz_id")
-    private String tzId;
-    @JsonProperty("localtime_epoch")
-    private Integer localtimeEpoch;
+    private double lon;
+    @JsonProperty("timezone_id")
+    private String timezoneId;
     @JsonProperty("localtime")
     private String localtime;
+    @JsonProperty("localtime_epoch")
+    private Integer localtimeEpoch;
+    @JsonProperty("utc_offset")
+    private String utcOffset;
 }

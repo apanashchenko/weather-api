@@ -1,7 +1,7 @@
 package com.weatherapi.ui.defaults;
 
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import com.weatherapi.ui.pages.MainSearchForm;
 import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.ui.pages.WeatherBitWidget;
@@ -21,7 +21,7 @@ public class MainWeatherSearchTests extends DefaultTestBase {
     private MainSearchForm mainSearchForm = new MainSearchForm();
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
     private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
-    private ApixuWidget apixuWidget = new ApixuWidget();
+    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
 
     private Stream<Arguments> widgets() {
         return Stream.of(
@@ -41,7 +41,7 @@ public class MainWeatherSearchTests extends DefaultTestBase {
 
         weatherBitWidget.load(city).checkWeather(owp);
 
-        apixuWidget.load(city).checkWeather(owp);
+        weatherStackWidget.load(city).checkWeather(owp);
 
     }
 

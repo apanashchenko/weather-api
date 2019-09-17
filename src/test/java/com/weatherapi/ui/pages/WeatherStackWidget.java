@@ -8,9 +8,9 @@ import static com.codeborne.selenide.Selenide.$;
  * Created by alpa on 2019-08-26
  */
 @Slf4j
-public class ApixuWidget extends BaseWidget<ApixuWidget> {
+public class WeatherStackWidget extends BaseWidget<WeatherStackWidget> {
 
-    public ApixuWidget() {
+    public WeatherStackWidget() {
         super($("#apixuWidget"), $("#searchFormApixu"));
     }
 

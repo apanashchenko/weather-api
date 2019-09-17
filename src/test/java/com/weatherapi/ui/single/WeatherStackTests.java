@@ -1,21 +1,21 @@
 package com.weatherapi.ui.single;
 
-import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import org.junit.jupiter.api.Test;
 
 
-public class ApixuTests extends SingleTestBase {
+public class WeatherStackTests extends SingleTestBase {
 
-    private ApixuWidget apixuWidget = new ApixuWidget();
+    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
 
     @Test
-    public void apixuWidgetSearchTest() {
+    public void weatherStackWidgetSearchTest() {
         String expectedCity = "New York";
         String expectedCoords = "lat: 40.71, lon: -74.01";
         String expectedTemperature = "17.2";
         String expectedDescription = "Partly cloudy";
 
-        apixuWidget
+        weatherStackWidget
                 .load()
                 .searchWeatherByCityName(expectedCity)
                 .checkWeather(expectedCity, expectedCoords, expectedTemperature, expectedDescription);

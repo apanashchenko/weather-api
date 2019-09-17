@@ -2,10 +2,10 @@ package com.weatherapi.ui.single.mocks.simple;
 
 import com.codeborne.selenide.Configuration;
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.ui.pages.WeatherBitWidget;
-import com.weatherapi.service.ApixuService;
+import com.weatherapi.service.WeatherStackService;
 import com.weatherapi.service.OpenWeatherMapService;
 import com.weatherapi.service.WeatherBitService;
 import org.junit.jupiter.api.AfterAll;
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SimpleMockTests {
 
-    private ApixuWidget apixuWidget = new ApixuWidget();
+    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
     private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
 
@@ -45,7 +45,7 @@ public class SimpleMockTests {
     private String baseUrl;
 
     @MockBean
-    private ApixuService apixuService;
+    private WeatherStackService weatherStackService;
 
     @MockBean
     private OpenWeatherMapService openWeatherMapService;
@@ -61,7 +61,7 @@ public class SimpleMockTests {
 
     @BeforeEach
     public void resetMocks() {
-        Mockito.reset(apixuService, openWeatherMapService, weatherBitService);
+        Mockito.reset(weatherStackService, openWeatherMapService, weatherBitService);
     }
 
     @AfterAll
@@ -71,18 +71,18 @@ public class SimpleMockTests {
 
     @Test
     public void apixuSearchWithAnyValueTest() {
-        when(apixuService.getWeatherByCityName(anyString())).thenReturn(apixuResponse);
+        when(weatherStackService.getWeatherByCityName(anyString())).thenReturn(apixuResponse);
 
-        apixuWidget
+        weatherStackWidget
                 .searchWeatherByCityName("blabla")
                 .checkWeather(apixuResponse);
     }
 
     @Test
     public void apixuSearchWithPredefineValueTest() {
-        when(apixuService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
+        when(weatherStackService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
 
-        apixuWidget
+        weatherStackWidget
                 .searchWeatherByCityName(apixuResponse.getCity())
                 .checkWeather(apixuResponse);
     }
@@ -91,7 +91,7 @@ public class SimpleMockTests {
     public void openWidgetMapSearchWithAnyValueTest() {
         when(openWeatherMapService.getWeatherByCityName(anyString())).thenReturn(openWeatherResponse);
 
-        apixuWidget
+        weatherStackWidget
                 .searchWeatherByCityName("trololo")
                 .checkWeather(openWeatherResponse);
     }

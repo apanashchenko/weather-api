@@ -1,8 +1,8 @@
 package com.weatherapi.ui.single.mocks;
 
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.ApixuWidget;
-import com.weatherapi.service.ApixuService;
+import com.weatherapi.ui.pages.WeatherStackWidget;
+import com.weatherapi.service.WeatherStackService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,33 +16,33 @@ import static org.mockito.Mockito.when;
 
 
 @Slf4j
-public class ApixuMockTests extends SingleMockTestBase {
+public class WeatherStackMockTests extends SingleMockTestBase {
 
-    private ApixuWidget apixuWidget = new ApixuWidget();
+    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
 
     @MockBean
-    private ApixuService apixuService;
+    private WeatherStackService weatherStackService;
 
     @BeforeEach
     public void setUpMocks() {
         log.info("Start up mock");
-        when(apixuService.getWeatherByCityName(eq(openWeatherResponse.getCity()))).thenReturn(openWeatherResponse);
-        when(apixuService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
-        when(apixuService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
+        when(weatherStackService.getWeatherByCityName(eq(openWeatherResponse.getCity()))).thenReturn(openWeatherResponse);
+        when(weatherStackService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
+        when(weatherStackService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
         log.info("Finish up mock");
     }
 
     @AfterEach
     public void resetMocks() {
         log.info("Reset mocks");
-        Mockito.reset(apixuService);
+        Mockito.reset(weatherStackService);
     }
 
 
     @ParameterizedTest
     @MethodSource("com.weatherapi.ui.single.mocks.SingleMockTestBase#cities")
     public void apixuSearchTest(WeatherResponse weatherResponse) {
-        apixuWidget
+        weatherStackWidget
                 .searchWeatherByCityName(weatherResponse.getCity())
                 .checkWeather(weatherResponse);
     }

@@ -2,11 +2,11 @@ package com.weatherapi.ui.defaults.mocks;
 
 import com.codeborne.selenide.Configuration;
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import com.weatherapi.ui.pages.MainSearchForm;
 import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.ui.pages.WeatherBitWidget;
-import com.weatherapi.service.ApixuService;
+import com.weatherapi.service.WeatherStackService;
 import com.weatherapi.service.OpenWeatherMapService;
 import com.weatherapi.service.WeatherBitService;
 import lombok.extern.slf4j.Slf4j;
@@ -53,12 +53,12 @@ public class MainWeatherSearchMockTests {
     private WeatherBitService weatherBitService;
 
     @MockBean
-    private ApixuService apixuService;
+    private WeatherStackService weatherStackService;
 
     private MainSearchForm mainSearchForm = new MainSearchForm();
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
     private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
-    private ApixuWidget apixuWidget = new ApixuWidget();
+    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
 
     @BeforeAll
     public void setUp() {
@@ -76,14 +76,14 @@ public class MainWeatherSearchMockTests {
         when(weatherBitService.getWeatherByCityName(eq(PARIS))).thenReturn(getWbParisResponse());
         when(weatherBitService.getWeatherByCityName(eq(LONDON))).thenReturn(getWbLondonResponse());
 
-        when(apixuService.getWeatherByCityName(eq(BERLIN))).thenReturn(getApixuBerlinResponse());
-        when(apixuService.getWeatherByCityName(eq(PARIS))).thenReturn(getApixuParisResponse());
-        when(apixuService.getWeatherByCityName(eq(LONDON))).thenReturn(getApixuLondonResponse());
+        when(weatherStackService.getWeatherByCityName(eq(BERLIN))).thenReturn(getApixuBerlinResponse());
+        when(weatherStackService.getWeatherByCityName(eq(PARIS))).thenReturn(getApixuParisResponse());
+        when(weatherStackService.getWeatherByCityName(eq(LONDON))).thenReturn(getApixuLondonResponse());
     }
 
     @AfterEach
     public void resetMocks() {
-        Mockito.reset(openWeatherMapService, weatherBitService,apixuService);
+        Mockito.reset(openWeatherMapService, weatherBitService, weatherStackService);
     }
 
     @AfterAll
@@ -109,7 +109,7 @@ public class MainWeatherSearchMockTests {
 
         weatherBitWidget.load(city).checkWeather(wb);
 
-        apixuWidget.load(city).checkWeather(apixu);
+        weatherStackWidget.load(city).checkWeather(apixu);
     }
 
     private WeatherResponse getOwmBerlinResponse() {

@@ -2,11 +2,11 @@ package com.weatherapi.ui.defaults.mocks;
 
 import com.codeborne.selenide.Configuration;
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.ApixuWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import com.weatherapi.ui.pages.BaseWidget;
 import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.ui.pages.WeatherBitWidget;
-import com.weatherapi.service.ApixuService;
+import com.weatherapi.service.WeatherStackService;
 import com.weatherapi.service.OpenWeatherMapService;
 import com.weatherapi.service.WeatherBitService;
 import lombok.extern.slf4j.Slf4j;
@@ -48,13 +48,13 @@ public class DefaultValuesWeatherMockTests {
     private WeatherBitService weatherBitService;
 
     @MockBean
-    private ApixuService apixuService;
+    private WeatherStackService weatherStackService;
 
     @BeforeAll
     public void setUp() {
         doReturn(getOpenWeatherResponse()).when(openWeatherMapService).getWeatherByCityName(anyString());
         doReturn(getWeatherBitResponse()).when(weatherBitService).getWeatherByCityName(anyString());
-        doReturn(getApixuResponse()).when(apixuService).getWeatherByCityName(anyString());
+        doReturn(getApixuResponse()).when(weatherStackService).getWeatherByCityName(anyString());
 
         Configuration.startMaximized = true;
         open(baseUrl);
@@ -62,7 +62,7 @@ public class DefaultValuesWeatherMockTests {
 
     @AfterAll
     public void tearDown() {
-        Mockito.reset(openWeatherMapService, weatherBitService, apixuService);
+        Mockito.reset(openWeatherMapService, weatherBitService, weatherStackService);
         close();
     }
 
@@ -70,7 +70,7 @@ public class DefaultValuesWeatherMockTests {
         return Stream.of(
                 of(new OpenWeatherWidget(), getOpenWeatherResponse()),
                 of(new WeatherBitWidget(), getWeatherBitResponse()),
-                of(new ApixuWidget(), getApixuResponse())
+                of(new WeatherStackWidget(), getApixuResponse())
         );
     }
 
