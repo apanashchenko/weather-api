@@ -31,7 +31,7 @@ public class SingleMockTestBase {
 
     WeatherResponse openWeatherResponse = getOpenWeatherResponse();
     WeatherResponse weatherBitResponse = getWeatherBitResponse();
-    WeatherResponse apixuResponse = getApixuResponse();
+    WeatherResponse weatherStackResponse = getWeatherStackResponse();
 
     @BeforeAll
     public void setUp() {
@@ -48,7 +48,7 @@ public class SingleMockTestBase {
         return Stream.of(
                 of(openWeatherResponse),
                 of(weatherBitResponse),
-                of(apixuResponse)
+                of(weatherStackResponse)
         );
     }
 

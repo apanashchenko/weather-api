@@ -45,7 +45,7 @@ public class SimpleMockParametrizeTests {
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
     private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
 
-    private WeatherResponse apixuResponse = getApixuResponse();
+    private WeatherResponse weatherStackResponse = getWeatherStackResponse();
     private WeatherResponse openWeatherResponse = getOpenWeatherResponse();
     private WeatherResponse weatherBitResponse = getWeatherBitResponse();
 
@@ -75,7 +75,7 @@ public class SimpleMockParametrizeTests {
                 .thenReturn(openWeatherResponse);
         when(weatherBitService.getWeatherByCityName(eq(weatherBitResponse.getCity())))
                 .thenReturn(weatherBitResponse);
-        when(weatherStackService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
+        when(weatherStackService.getWeatherByCityName(eq(weatherStackResponse.getCity()))).thenReturn(weatherStackResponse);
         log.info("Finish up mocks");
     }
 
@@ -94,7 +94,7 @@ public class SimpleMockParametrizeTests {
         return Stream.of(
                 of(openWeatherWidget, openWeatherResponse),
                 of(weatherBitWidget, weatherBitResponse),
-                of(weatherStackWidget, apixuResponse)
+                of(weatherStackWidget, weatherStackResponse)
         );
     }
 

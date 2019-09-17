@@ -29,7 +29,7 @@ public class OpenWeatherMapMockTests extends SingleMockTestBase {
                 .thenReturn(openWeatherResponse);
         when(openWeatherMapService.getWeatherByCityName(eq(weatherBitResponse.getCity())))
                 .thenReturn(weatherBitResponse);
-        when(openWeatherMapService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
+        when(openWeatherMapService.getWeatherByCityName(eq(weatherStackResponse.getCity()))).thenReturn(weatherStackResponse);
     }
 
     @AfterEach

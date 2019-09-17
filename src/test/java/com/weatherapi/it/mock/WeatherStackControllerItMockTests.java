@@ -13,7 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import static com.weatherapi.MockWeatherFactory.getApixuResponse;
+import static com.weatherapi.MockWeatherFactory.getWeatherStackResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
@@ -23,7 +23,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromObject
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class WeatherStackControllerItMockTests {
 
-    private WeatherResponse weatherBitResponse = getApixuResponse();
+    private WeatherResponse weatherStackResponse = getWeatherStackResponse();
 
     @Autowired
     protected WebTestClient webClient;
@@ -39,7 +39,7 @@ public class WeatherStackControllerItMockTests {
 
     @Test
     public void canGetTemperatureByCityWithAnyQueryParameter() {
-        when(weatherStackService.getWeatherByCityName(anyString())).thenReturn(weatherBitResponse);
+        when(weatherStackService.getWeatherByCityName(anyString())).thenReturn(weatherStackResponse);
 
         this.webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/ws/weather")
@@ -50,39 +50,39 @@ public class WeatherStackControllerItMockTests {
                 .isOk()
                 .expectBody(WeatherResponse.class)
                 .value(response -> {
-                    assertThat(response.getCity()).isEqualToIgnoringCase(weatherBitResponse.getCity());
-                    assertThat(response.getDescription()).isEqualTo(weatherBitResponse.getDescription());
-                    assertThat(response.getTemp()).isEqualTo(weatherBitResponse.getTemp());
-                    assertThat(response.getLat()).isEqualTo(weatherBitResponse.getLat());
-                    assertThat(response.getLon()).isEqualTo(weatherBitResponse.getLon());
+                    assertThat(response.getCity()).isEqualToIgnoringCase(weatherStackResponse.getCity());
+                    assertThat(response.getDescription()).isEqualTo(weatherStackResponse.getDescription());
+                    assertThat(response.getTemp()).isEqualTo(weatherStackResponse.getTemp());
+                    assertThat(response.getLat()).isEqualTo(weatherStackResponse.getLat());
+                    assertThat(response.getLon()).isEqualTo(weatherStackResponse.getLon());
                 });
     }
 
 
     @Test
     public void canGetTemperatureByCityWithSpecificParameter() {
-        when(weatherStackService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
+        when(weatherStackService.getWeatherByCityName(eq(weatherStackResponse.getCity()))).thenReturn(weatherStackResponse);
 
         this.webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/ws/weather")
-                        .queryParam("city", weatherBitResponse.getCity())
+                        .queryParam("city", weatherStackResponse.getCity())
                         .build())
                 .exchange()
                 .expectStatus()
                 .isOk()
                 .expectBody(WeatherResponse.class)
                 .value(response -> {
-                    assertThat(response.getCity()).isEqualToIgnoringCase(weatherBitResponse.getCity());
-                    assertThat(response.getDescription()).isEqualTo(weatherBitResponse.getDescription());
-                    assertThat(response.getTemp()).isEqualTo(weatherBitResponse.getTemp());
-                    assertThat(response.getLat()).isEqualTo(weatherBitResponse.getLat());
-                    assertThat(response.getLon()).isEqualTo(weatherBitResponse.getLon());
+                    assertThat(response.getCity()).isEqualToIgnoringCase(weatherStackResponse.getCity());
+                    assertThat(response.getDescription()).isEqualTo(weatherStackResponse.getDescription());
+                    assertThat(response.getTemp()).isEqualTo(weatherStackResponse.getTemp());
+                    assertThat(response.getLat()).isEqualTo(weatherStackResponse.getLat());
+                    assertThat(response.getLon()).isEqualTo(weatherStackResponse.getLon());
                 });
     }
 
     @Test
     public void canNotGetTemperatureByCityWithSpecificParameter() {
-        when(weatherStackService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
+        when(weatherStackService.getWeatherByCityName(eq(weatherStackResponse.getCity()))).thenReturn(weatherStackResponse);
 
         this.webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/ws/weather")
@@ -95,7 +95,7 @@ public class WeatherStackControllerItMockTests {
 
     @Test
     public void canGetTemperatureByCoordinateAnyQueryParameter() {
-        when(weatherStackService.getWeatherByGeographicCoordinates(any())).thenReturn(weatherBitResponse);
+        when(weatherStackService.getWeatherByGeographicCoordinates(any())).thenReturn(weatherStackResponse);
 
         this.webClient.post()
                 .uri("/ws/weather")
@@ -105,18 +105,18 @@ public class WeatherStackControllerItMockTests {
                 .isOk()
                 .expectBody(WeatherResponse.class)
                 .value(response -> {
-                    assertThat(response.getCity()).isEqualToIgnoringCase(weatherBitResponse.getCity());
-                    assertThat(response.getDescription()).isEqualTo(weatherBitResponse.getDescription());
-                    assertThat(response.getTemp()).isEqualTo(weatherBitResponse.getTemp());
-                    assertThat(response.getLat()).isEqualTo(weatherBitResponse.getLat());
-                    assertThat(response.getLon()).isEqualTo(weatherBitResponse.getLon());
+                    assertThat(response.getCity()).isEqualToIgnoringCase(weatherStackResponse.getCity());
+                    assertThat(response.getDescription()).isEqualTo(weatherStackResponse.getDescription());
+                    assertThat(response.getTemp()).isEqualTo(weatherStackResponse.getTemp());
+                    assertThat(response.getLat()).isEqualTo(weatherStackResponse.getLat());
+                    assertThat(response.getLon()).isEqualTo(weatherStackResponse.getLon());
                 });
     }
 
     @Test
     public void canGetTemperatureByCoordinatesWithSpecificQuery() {
         CityCoordinate coordinate = new CityCoordinate(1.1, 2.2);
-        when(weatherStackService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(weatherBitResponse);
+        when(weatherStackService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(weatherStackResponse);
 
         this.webClient.post()
                 .uri("/ws/weather")
@@ -126,18 +126,18 @@ public class WeatherStackControllerItMockTests {
                 .isOk()
                 .expectBody(WeatherResponse.class)
                 .value(response -> {
-                    assertThat(response.getCity()).isEqualToIgnoringCase(weatherBitResponse.getCity());
-                    assertThat(response.getDescription()).isEqualTo(weatherBitResponse.getDescription());
-                    assertThat(response.getTemp()).isEqualTo(weatherBitResponse.getTemp());
-                    assertThat(response.getLat()).isEqualTo(weatherBitResponse.getLat());
-                    assertThat(response.getLon()).isEqualTo(weatherBitResponse.getLon());
+                    assertThat(response.getCity()).isEqualToIgnoringCase(weatherStackResponse.getCity());
+                    assertThat(response.getDescription()).isEqualTo(weatherStackResponse.getDescription());
+                    assertThat(response.getTemp()).isEqualTo(weatherStackResponse.getTemp());
+                    assertThat(response.getLat()).isEqualTo(weatherStackResponse.getLat());
+                    assertThat(response.getLon()).isEqualTo(weatherStackResponse.getLon());
                 });
     }
 
     @Test
     public void canNotGetTemperatureByCoordinatesWithSpecificQuery() {
         CityCoordinate coordinate = new CityCoordinate(1.1, 2.2);
-        when(weatherStackService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(weatherBitResponse);
+        when(weatherStackService.getWeatherByGeographicCoordinates(eq(coordinate))).thenReturn(weatherStackResponse);
 
         this.webClient.post()
                 .uri("/ws/weather")

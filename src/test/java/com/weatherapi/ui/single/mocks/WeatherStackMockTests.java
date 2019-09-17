@@ -28,7 +28,7 @@ public class WeatherStackMockTests extends SingleMockTestBase {
         log.info("Start up mock");
         when(weatherStackService.getWeatherByCityName(eq(openWeatherResponse.getCity()))).thenReturn(openWeatherResponse);
         when(weatherStackService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
-        when(weatherStackService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
+        when(weatherStackService.getWeatherByCityName(eq(weatherStackResponse.getCity()))).thenReturn(weatherStackResponse);
         log.info("Finish up mock");
     }
 
@@ -41,7 +41,7 @@ public class WeatherStackMockTests extends SingleMockTestBase {
 
     @ParameterizedTest
     @MethodSource("com.weatherapi.ui.single.mocks.SingleMockTestBase#cities")
-    public void apixuSearchTest(WeatherResponse weatherResponse) {
+    public void weatherStackSearchTest(WeatherResponse weatherResponse) {
         weatherStackWidget
                 .searchWeatherByCityName(weatherResponse.getCity())
                 .checkWeather(weatherResponse);

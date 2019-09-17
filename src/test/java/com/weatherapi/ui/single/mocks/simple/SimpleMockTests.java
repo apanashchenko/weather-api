@@ -37,7 +37,7 @@ public class SimpleMockTests {
     private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
     private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
 
-    private WeatherResponse apixuResponse = getApixuResponse();
+    private WeatherResponse weatherStackResponse = getWeatherStackResponse();
     private WeatherResponse openWeatherResponse = getOpenWeatherResponse();
     private WeatherResponse weatherBitResponse = getWeatherBitResponse();
 
@@ -70,21 +70,21 @@ public class SimpleMockTests {
     }
 
     @Test
-    public void apixuSearchWithAnyValueTest() {
-        when(weatherStackService.getWeatherByCityName(anyString())).thenReturn(apixuResponse);
+    public void weatherStackSearchWithAnyValueTest() {
+        when(weatherStackService.getWeatherByCityName(anyString())).thenReturn(weatherStackResponse);
 
         weatherStackWidget
                 .searchWeatherByCityName("blabla")
-                .checkWeather(apixuResponse);
+                .checkWeather(weatherStackResponse);
     }
 
     @Test
-    public void apixuSearchWithPredefineValueTest() {
-        when(weatherStackService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
+    public void weatherStackSearchWithPredefineValueTest() {
+        when(weatherStackService.getWeatherByCityName(eq(weatherStackResponse.getCity()))).thenReturn(weatherStackResponse);
 
         weatherStackWidget
-                .searchWeatherByCityName(apixuResponse.getCity())
-                .checkWeather(apixuResponse);
+                .searchWeatherByCityName(weatherStackResponse.getCity())
+                .checkWeather(weatherStackResponse);
     }
 
     @Test

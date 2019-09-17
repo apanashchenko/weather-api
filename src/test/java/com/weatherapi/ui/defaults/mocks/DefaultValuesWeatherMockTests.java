@@ -54,7 +54,7 @@ public class DefaultValuesWeatherMockTests {
     public void setUp() {
         doReturn(getOpenWeatherResponse()).when(openWeatherMapService).getWeatherByCityName(anyString());
         doReturn(getWeatherBitResponse()).when(weatherBitService).getWeatherByCityName(anyString());
-        doReturn(getApixuResponse()).when(weatherStackService).getWeatherByCityName(anyString());
+        doReturn(getWeatherStackResponse()).when(weatherStackService).getWeatherByCityName(anyString());
 
         Configuration.startMaximized = true;
         open(baseUrl);
@@ -70,7 +70,7 @@ public class DefaultValuesWeatherMockTests {
         return Stream.of(
                 of(new OpenWeatherWidget(), getOpenWeatherResponse()),
                 of(new WeatherBitWidget(), getWeatherBitResponse()),
-                of(new WeatherStackWidget(), getApixuResponse())
+                of(new WeatherStackWidget(), getWeatherStackResponse())
         );
     }
 

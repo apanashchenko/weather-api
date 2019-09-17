@@ -29,7 +29,7 @@ public class WeatherBitMockTests extends SingleMockTestBase {
         when(weatherBitService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
         when(weatherBitService.getWeatherByCityName(eq(weatherBitResponse.getCity()))).thenReturn(weatherBitResponse);
-        when(weatherBitService.getWeatherByCityName(eq(apixuResponse.getCity()))).thenReturn(apixuResponse);
+        when(weatherBitService.getWeatherByCityName(eq(weatherStackResponse.getCity()))).thenReturn(weatherStackResponse);
         log.info("Finish up mock");
     }
 

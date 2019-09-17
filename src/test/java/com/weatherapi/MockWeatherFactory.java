@@ -28,7 +28,7 @@ public class MockWeatherFactory {
         return weatherResponse;
     }
 
-    public static WeatherResponse getApixuResponse() {
+    public static WeatherResponse getWeatherStackResponse() {
         WeatherResponse weatherResponse = new WeatherResponse();
         weatherResponse.setCity("Apixu City");
         weatherResponse.setDescription("Apixu cool");
