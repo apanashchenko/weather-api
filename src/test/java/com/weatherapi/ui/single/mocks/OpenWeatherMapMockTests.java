@@ -1,7 +1,6 @@
 package com.weatherapi.ui.single.mocks;
 
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.service.OpenWeatherMapService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -14,11 +13,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-
 @Slf4j
 public class OpenWeatherMapMockTests extends SingleMockTestBase {
-
-    private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
 
     @MockBean
     private OpenWeatherMapService openWeatherMapService;

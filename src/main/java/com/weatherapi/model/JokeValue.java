@@ -12,6 +12,7 @@ public class JokeValue {
 
     private int id;
     private String joke;
+    private String img;
     private List<String> categories;
 
 }

@@ -21,7 +21,7 @@ public class MockWeatherFactory {
     public static WeatherResponse getWeatherBitResponse() {
         WeatherResponse weatherResponse = new WeatherResponse();
         weatherResponse.setCity("WB City");
-        weatherResponse.setDescription("WB greate");
+        weatherResponse.setDescription("WB great");
         weatherResponse.setTemp(15.2);
         weatherResponse.setLat(15.21);
         weatherResponse.setLon(33.25);

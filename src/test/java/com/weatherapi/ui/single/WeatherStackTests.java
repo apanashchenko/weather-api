@@ -1,12 +1,9 @@
 package com.weatherapi.ui.single;
 
-import com.weatherapi.ui.pages.WeatherStackWidget;
 import org.junit.jupiter.api.Test;
 
 
 public class WeatherStackTests extends SingleTestBase {
-
-    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
 
     @Test
     public void weatherStackWidgetSearchTest() {

@@ -11,6 +11,6 @@ public class JokeMessage {
 
     public SelenideElement joke = $("#joke");
     public SelenideElement message = joke.$(".text");
-
+    public SelenideElement img = joke.$("img");
 
 }

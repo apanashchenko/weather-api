@@ -2,6 +2,9 @@ package com.weatherapi.ui.single.mocks;
 
 import com.codeborne.selenide.Configuration;
 import com.weatherapi.model.WeatherResponse;
+import com.weatherapi.ui.pages.OpenWeatherWidget;
+import com.weatherapi.ui.pages.WeatherBitWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
@@ -29,9 +32,14 @@ public class SingleMockTestBase {
     @Value("${ui.url}")
     private String baseUrl;
 
-    WeatherResponse openWeatherResponse = getOpenWeatherResponse();
-    WeatherResponse weatherBitResponse = getWeatherBitResponse();
-    WeatherResponse weatherStackResponse = getWeatherStackResponse();
+    protected OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
+    protected WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
+    protected WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
+
+    protected WeatherResponse openWeatherResponse = getOpenWeatherResponse();
+    protected WeatherResponse weatherBitResponse = getWeatherBitResponse();
+    protected WeatherResponse weatherStackResponse = getWeatherStackResponse();
+
 
     @BeforeAll
     public void setUp() {

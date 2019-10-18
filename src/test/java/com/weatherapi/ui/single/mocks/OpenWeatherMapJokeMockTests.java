@@ -3,10 +3,9 @@ package com.weatherapi.ui.single.mocks;
 import com.codeborne.selenide.Condition;
 import com.weatherapi.model.Joke;
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.JokeMessage;
-import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.service.JokeService;
 import com.weatherapi.service.OpenWeatherMapService;
+import com.weatherapi.ui.pages.JokeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +27,6 @@ import static org.mockito.Mockito.when;
 @Slf4j
 public class OpenWeatherMapJokeMockTests extends SingleMockTestBase {
 
-    private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
     private Joke jokeResponse = getJokeResponse();
 
     @MockBean

@@ -1,7 +1,6 @@
 package com.weatherapi.ui.single.mocks;
 
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.WeatherStackWidget;
 import com.weatherapi.service.WeatherStackService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -17,8 +16,6 @@ import static org.mockito.Mockito.when;
 
 @Slf4j
 public class WeatherStackMockTests extends SingleMockTestBase {
-
-    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
 
     @MockBean
     private WeatherStackService weatherStackService;

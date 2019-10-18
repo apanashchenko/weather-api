@@ -1,12 +1,9 @@
 package com.weatherapi.ui.single;
 
-import com.weatherapi.ui.pages.WeatherBitWidget;
 import org.junit.jupiter.api.Test;
 
 
 public class WeatherBitTests extends SingleTestBase {
-
-    private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
 
     @Test
     public void witherWidgetSearchTest() {
