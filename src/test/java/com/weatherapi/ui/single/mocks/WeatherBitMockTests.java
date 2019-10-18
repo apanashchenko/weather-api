@@ -15,13 +15,13 @@ import static org.mockito.Mockito.when;
 
 
 @Slf4j
-public class WeatherBitMockTests extends SingleMockTestBase {
+class WeatherBitMockTests extends SingleMockTestBase {
 
     @MockBean
     private WeatherBitService weatherBitService;
 
     @BeforeEach
-    public void setUpMocks() {
+    void setUpMocks() {
         log.info("Start up mock");
         when(weatherBitService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
@@ -31,14 +31,14 @@ public class WeatherBitMockTests extends SingleMockTestBase {
     }
 
     @AfterEach
-    public void resetMocks() {
+    void resetMocks() {
         log.info("Reset mocks");
         Mockito.reset(weatherBitService);
     }
 
     @ParameterizedTest
     @MethodSource("com.weatherapi.ui.single.mocks.SingleMockTestBase#cities")
-    public void weatherBitSearchTest(WeatherResponse weatherResponse) {
+    void weatherBitSearchTest(WeatherResponse weatherResponse) {
         weatherBitWidget
                 .searchWeatherByCityName(weatherResponse.getCity())
                 .checkWeather(weatherResponse);

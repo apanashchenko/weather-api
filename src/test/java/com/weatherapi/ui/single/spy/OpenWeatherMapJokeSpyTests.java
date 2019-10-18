@@ -7,7 +7,6 @@ import com.weatherapi.model.WeatherResponse;
 import com.weatherapi.service.JokeService;
 import com.weatherapi.service.OpenWeatherMapService;
 import com.weatherapi.ui.pages.JokeMessage;
-import com.weatherapi.ui.pages.OpenWeatherWidget;
 import com.weatherapi.ui.single.SingleTestBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,9 +21,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 
-public class OpenWeatherMapJokeSpyTests extends SingleTestBase {
+class OpenWeatherMapJokeSpyTests extends SingleTestBase {
 
-    private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
     private Joke jokeResponse;
     private WeatherResponse openWeatherResponse;
 
@@ -35,19 +33,19 @@ public class OpenWeatherMapJokeSpyTests extends SingleTestBase {
     private JokeService jokeService;
 
     @BeforeEach
-    public void setUpMocks() {
+    void setUpMocks() {
         setUpResponse();
         setUpJoke();
     }
 
     @AfterEach
-    public void resetMocks() {
+    void resetMocks() {
         Mockito.reset(openWeatherMapService, jokeService);
     }
 
 
     @Test
-    public void openWidgetMapSpyJokeTest() {
+    void openWidgetMapSpyJokeTest() {
         when(openWeatherMapService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
 
@@ -58,10 +56,11 @@ public class OpenWeatherMapJokeSpyTests extends SingleTestBase {
         JokeMessage jokeMessage = new JokeMessage();
         jokeMessage.joke.shouldBe(Condition.exist);
         jokeMessage.message.shouldNotBe(Condition.empty);
+        jokeMessage.img.shouldHave(Condition.attribute("src"));
     }
 
     @Test
-    public void openWidgetMapSpyAndStubJokeTest() {
+    void openWidgetMapSpyAndStubJokeTest() {
         when(openWeatherMapService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
         when(jokeService.getRandomJoke()).thenReturn(jokeResponse);
@@ -73,6 +72,7 @@ public class OpenWeatherMapJokeSpyTests extends SingleTestBase {
         JokeMessage jokeMessage = new JokeMessage();
         jokeMessage.joke.shouldBe(Condition.exist);
         jokeMessage.message.shouldHave(Condition.text(jokeResponse.getValue().getJoke()));
+        jokeMessage.img.shouldHave(Condition.attribute("src", jokeResponse.getValue().getImg()));
     }
 
 

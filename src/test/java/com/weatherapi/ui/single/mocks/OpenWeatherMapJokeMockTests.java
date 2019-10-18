@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 
 @Slf4j
-public class OpenWeatherMapJokeMockTests extends SingleMockTestBase {
+class OpenWeatherMapJokeMockTests extends SingleMockTestBase {
 
     private Joke jokeResponse = getJokeResponse();
 
@@ -36,13 +36,13 @@ public class OpenWeatherMapJokeMockTests extends SingleMockTestBase {
     private JokeService jokeService;
 
     @BeforeEach
-    public void setUpMocks() {
+    void setUpMocks() {
         Mockito.reset(openWeatherMapService, jokeService);
         refresh();
     }
 
     @Test
-    public void openWidgetMapJokeTest() {
+    void openWidgetMapJokeTest() {
         openWeatherResponse.setTemp(21);
         when(openWeatherMapService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
@@ -68,8 +68,8 @@ public class OpenWeatherMapJokeMockTests extends SingleMockTestBase {
 
     @ParameterizedTest
     @MethodSource("temperatures")
-    public void openWidgetMapJokeBoundaryValuesTest(double temp, boolean isJokeShouldBe,
-                                      WeatherResponse weatherResponse, Joke jokeResponse) {
+    void openWidgetMapJokeBoundaryValuesTest(double temp, boolean isJokeShouldBe,
+                                             WeatherResponse weatherResponse, Joke jokeResponse) {
         weatherResponse.setTemp(temp);
         when(openWeatherMapService.getWeatherByCityName(eq(weatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);

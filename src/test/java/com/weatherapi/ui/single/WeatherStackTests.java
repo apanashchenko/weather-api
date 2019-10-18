@@ -3,10 +3,10 @@ package com.weatherapi.ui.single;
 import org.junit.jupiter.api.Test;
 
 
-public class WeatherStackTests extends SingleTestBase {
+class WeatherStackTests extends SingleTestBase {
 
     @Test
-    public void weatherStackWidgetSearchTest() {
+    void weatherStackWidgetSearchTest() {
         String expectedCity = "New York";
         String expectedCoords = "lat: 40.714, lon: -74.006";
         String expectedTemperature = "17.0";

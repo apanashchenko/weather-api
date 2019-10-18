@@ -14,13 +14,13 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @Slf4j
-public class OpenWeatherMapMockTests extends SingleMockTestBase {
+class OpenWeatherMapMockTests extends SingleMockTestBase {
 
     @MockBean
     private OpenWeatherMapService openWeatherMapService;
 
     @BeforeEach
-    public void setUpMocks() {
+    void setUpMocks() {
         when(openWeatherMapService.getWeatherByCityName(eq(openWeatherResponse.getCity())))
                 .thenReturn(openWeatherResponse);
         when(openWeatherMapService.getWeatherByCityName(eq(weatherBitResponse.getCity())))
@@ -29,13 +29,13 @@ public class OpenWeatherMapMockTests extends SingleMockTestBase {
     }
 
     @AfterEach
-    public void resetMocks() {
+    void resetMocks() {
         Mockito.reset(openWeatherMapService);
     }
 
     @ParameterizedTest
     @MethodSource("com.weatherapi.ui.single.mocks.SingleMockTestBase#cities")
-    public void openWidgetMapSearchTest(WeatherResponse weatherResponse) {
+    void openWidgetMapSearchTest(WeatherResponse weatherResponse) {
         openWeatherWidget
                 .searchWeatherByCityName(weatherResponse.getCity())
                 .checkWeather(weatherResponse);

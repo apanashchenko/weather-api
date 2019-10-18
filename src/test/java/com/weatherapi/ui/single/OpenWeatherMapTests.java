@@ -3,10 +3,10 @@ package com.weatherapi.ui.single;
 import org.junit.jupiter.api.Test;
 
 
-public class OpenWeatherMapTests extends SingleTestBase {
+class OpenWeatherMapTests extends SingleTestBase {
 
     @Test
-    public void openWidgetMapSearchTest() {
+    void openWidgetMapSearchTest() {
         String expectedCity = "Kiev";
         String expectedCoords = "lat: 50.43, lon: 30.52";
         String expectedTemperature = "25";
