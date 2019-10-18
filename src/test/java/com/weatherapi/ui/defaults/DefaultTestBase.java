@@ -1,6 +1,10 @@
 package com.weatherapi.ui.defaults;
 
 import com.codeborne.selenide.Configuration;
+import com.weatherapi.ui.pages.MainSearchForm;
+import com.weatherapi.ui.pages.OpenWeatherWidget;
+import com.weatherapi.ui.pages.WeatherBitWidget;
+import com.weatherapi.ui.pages.WeatherStackWidget;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
@@ -19,6 +23,11 @@ import static com.codeborne.selenide.Selenide.open;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DefaultTestBase {
+
+    protected OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
+    MainSearchForm mainSearchForm = new MainSearchForm();
+    WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
+    WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
 
     @Value("${ui.url}")
     private String baseUrl;

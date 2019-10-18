@@ -25,7 +25,7 @@ public class DefaultValuesWeatherTests extends DefaultTestBase {
     }
 
 
-    @ParameterizedTest(name = "{index} ==> widget={0} => city={1} => coordinates={2} => temp={3} => description={4}")
+    @ParameterizedTest(name = "widget={0} => city={1} => coordinates={2} => temp={3} => description={4}")
     @MethodSource("widgets")
     public void checkWidgetsDefaultValues(BaseWidget widget, String city, String coordinates,
                                           String temp, String description) {

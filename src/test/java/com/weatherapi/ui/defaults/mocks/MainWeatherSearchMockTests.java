@@ -100,7 +100,7 @@ public class MainWeatherSearchMockTests {
     }
 
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "city={0} => widget={1} => widget={2} => widget={3}")
     @MethodSource("widgets")
     public void checkWidgetsDefaultValues(String city, WeatherResponse owp, WeatherResponse wb, WeatherResponse apixu) {
         mainSearchForm.searchWeather(city);
@@ -116,7 +116,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse owmBerlinResponse = new WeatherResponse();
         owmBerlinResponse.setCity(BERLIN);
         owmBerlinResponse.setDescription("thunderstorm with light rain");
-        owmBerlinResponse.setTemp(26.2);
+        owmBerlinResponse.setTemp(15.2);
         owmBerlinResponse.setLat(52.52);
         owmBerlinResponse.setLon(13.39);
 
@@ -127,7 +127,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse owmParisResponse = new WeatherResponse();
         owmParisResponse.setCity(PARIS);
         owmParisResponse.setDescription("clear sky");
-        owmParisResponse.setTemp(30.5);
+        owmParisResponse.setTemp(10.8);
         owmParisResponse.setLat(48.86);
         owmParisResponse.setLon(2.35);
 
@@ -138,7 +138,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse owmLondonResponse = new WeatherResponse();
         owmLondonResponse.setCity(LONDON);
         owmLondonResponse.setDescription("clear sky");
-        owmLondonResponse.setTemp(30.9);
+        owmLondonResponse.setTemp(11.9);
         owmLondonResponse.setLat(51.51);
         owmLondonResponse.setLon(-0.13);
 
@@ -149,7 +149,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse wbBerlinResponse = new WeatherResponse();
         wbBerlinResponse.setCity(BERLIN);
         wbBerlinResponse.setDescription("Moderate rain");
-        wbBerlinResponse.setTemp(25.8);
+        wbBerlinResponse.setTemp(12);
         wbBerlinResponse.setLat(52.52437);
         wbBerlinResponse.setLon(13.41053);
 
@@ -160,7 +160,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse wbParisResponse = new WeatherResponse();
         wbParisResponse.setCity(PARIS);
         wbParisResponse.setDescription("Clear sky");
-        wbParisResponse.setTemp(25.8);
+        wbParisResponse.setTemp(16);
         wbParisResponse.setLat(48.85341);
         wbParisResponse.setLon(2.3488);
 
@@ -171,7 +171,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse wbLondonResponse = new WeatherResponse();
         wbLondonResponse.setCity(LONDON);
         wbLondonResponse.setDescription("Few clouds");
-        wbLondonResponse.setTemp(31.3);
+        wbLondonResponse.setTemp(5);
         wbLondonResponse.setLat(35.32897);
         wbLondonResponse.setLon(-93.25296);
 
@@ -182,7 +182,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse apixuBerlinResponse = new WeatherResponse();
         apixuBerlinResponse.setCity(BERLIN);
         apixuBerlinResponse.setDescription("Moderate or heavy rain with thunder");
-        apixuBerlinResponse.setTemp(30.3);
+        apixuBerlinResponse.setTemp(8.3);
         apixuBerlinResponse.setLat(52.52);
         apixuBerlinResponse.setLon(13.4);
 
@@ -193,7 +193,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse apixuParisResponse = new WeatherResponse();
         apixuParisResponse.setCity(PARIS);
         apixuParisResponse.setDescription("Sunny");
-        apixuParisResponse.setTemp(32.2);
+        apixuParisResponse.setTemp(18.2);
         apixuParisResponse.setLat(48.87);
         apixuParisResponse.setLon(2.33);
 
@@ -204,7 +204,7 @@ public class MainWeatherSearchMockTests {
         WeatherResponse apixuLondonResponse = new WeatherResponse();
         apixuLondonResponse.setCity(LONDON);
         apixuLondonResponse.setDescription("Sunny");
-        apixuLondonResponse.setTemp(31.1);
+        apixuLondonResponse.setTemp(7.1);
         apixuLondonResponse.setLat(51.52);
         apixuLondonResponse.setLon(-0.11);
 

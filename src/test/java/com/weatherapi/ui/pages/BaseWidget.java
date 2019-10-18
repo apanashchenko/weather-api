@@ -56,6 +56,7 @@ public abstract class BaseWidget<T extends BaseWidget> {
     }
 
     public T searchWeatherByCityName(String city) {
+        log.info("Search weather for: {}", city);
         searchFrom.$("#searchFieldWidget").shouldBe(Condition.visible).setValue(city);
         searchFrom.$("#searchBtnWidget").shouldBe(Condition.visible).click();
         return (T) this;

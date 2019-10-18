@@ -1,10 +1,6 @@
 package com.weatherapi.ui.defaults;
 
 import com.weatherapi.model.WeatherResponse;
-import com.weatherapi.ui.pages.WeatherStackWidget;
-import com.weatherapi.ui.pages.MainSearchForm;
-import com.weatherapi.ui.pages.OpenWeatherWidget;
-import com.weatherapi.ui.pages.WeatherBitWidget;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,11 +14,6 @@ import static org.junit.jupiter.params.provider.Arguments.of;
 @Slf4j
 public class MainWeatherSearchTests extends DefaultTestBase {
 
-    private MainSearchForm mainSearchForm = new MainSearchForm();
-    private OpenWeatherWidget openWeatherWidget = new OpenWeatherWidget();
-    private WeatherBitWidget weatherBitWidget = new WeatherBitWidget();
-    private WeatherStackWidget weatherStackWidget = new WeatherStackWidget();
-
     private Stream<Arguments> widgets() {
         return Stream.of(
                 of("Berlin", getOwmBerlinResponse(), getWbBerlinResponse(), getApixuBerlinResponse()),
@@ -32,16 +23,16 @@ public class MainWeatherSearchTests extends DefaultTestBase {
     }
 
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "city={0} => widget={1} => widget={2} => widget={3}")
     @MethodSource("widgets")
     public void checkWidgetsDefaultValues(String city, WeatherResponse owp, WeatherResponse wb, WeatherResponse apixu) {
         mainSearchForm.searchWeather(city);
 
         openWeatherWidget.load(city).checkWeather(owp);
 
-        weatherBitWidget.load(city).checkWeather(owp);
+        weatherBitWidget.load(city).checkWeather(wb);
 
-        weatherStackWidget.load(city).checkWeather(owp);
+        weatherStackWidget.load(city).checkWeather(apixu);
 
     }
 
